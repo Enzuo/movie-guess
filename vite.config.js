@@ -7,8 +7,16 @@ import mix from 'vite-plugin-mix'
 export default defineConfig({
   plugins: [
     react(),     
-    mix({
-      handler: './server/app.js',
-    }),
-  ]
+    // mix({
+    //   handler: './server/app.js',
+    // }),
+  ],
+  build: {
+    // generate manifest.json in outDir
+    manifest: true,
+    rollupOptions: {
+      // overwrite default .html entry
+      input: "./src/main.jsx",
+    }
+  }
 })

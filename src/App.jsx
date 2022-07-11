@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import io from 'socket.io-client'
 import logo from './logo.svg'
 import './App.css'
 
@@ -7,6 +8,7 @@ function App() {
 
   useEffect(() => {
     fetch('api/hi').then(res => res.json()).then(res => console.log(res))
+    var socket = io(); // defaults trying to connect to the host that serves the page.
   })
 
   return (
