@@ -1,9 +1,13 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import logo from './logo.svg'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    fetch('api/hi').then(res => res.json()).then(res => console.log(res))
+  })
 
   return (
     <div className="App">
