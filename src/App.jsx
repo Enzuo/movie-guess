@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import io from 'socket.io-client'
 import logo from './logo.svg'
+import VideoFile from './VideoFile'
 import './App.css'
 
 function App() {
@@ -13,9 +14,10 @@ function App() {
 
   return (
     <div className="App">
+      <VideoFile></VideoFile>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
+        <p>Hello Vite + React + Express!</p>
         <p>
           <button type="button" onClick={() => setCount((count) => count + 1)}>
             count is: {count}

@@ -3,6 +3,8 @@ import path from 'path'
 import http from 'http'
 import { Server } from 'socket.io'
 
+const PORT = 5000
+
 const app = express()
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -19,7 +21,6 @@ io.on('connection', (socket) => {
 
 
 
-const PORT = 5000
 
 app.use("/", express.static(path.join(__dirname, "public")));
 
