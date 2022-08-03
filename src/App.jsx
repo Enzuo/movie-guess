@@ -1,20 +1,20 @@
 import { useState, useEffect } from 'react'
 import io from 'socket.io-client'
 import logo from './logo.svg'
-import VideoFile from './VideoFile'
 import './App.css'
+import Quizz from './Quizz'
 
 function App() {
   const [count, setCount] = useState(0)
 
   useEffect(() => {
-    fetch('api/hi').then(res => res.json()).then(res => console.log(res))
+    fetch('api/getQuestion').then(res => res.json()).then(res => console.log(res))
     var socket = io(); // defaults trying to connect to the host that serves the page.
   })
 
   return (
     <div className="App">
-      <VideoFile></VideoFile>
+      <Quizz></Quizz>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>Hello Vite + React + Express!</p>

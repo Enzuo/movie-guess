@@ -9,17 +9,19 @@ import {FocusOn} from "@cloudinary/url-gen/qualifiers/focusOn";
 import {Gravity} from "@cloudinary/url-gen/qualifiers";
 import {AutoFocus} from "@cloudinary/url-gen/qualifiers/autoFocus";
 
-const VideoFile = () => {
+const VideoFile = (props) => {
 
   // Create and configure your Cloudinary instance.
   const cld = new Cloudinary({
     cloud: {
-      cloudName: 'demo'
+      cloudName: 'dnv2xywfm'
     }
   }); 
 
+  const {file} = props
+
   // Use the video with public ID, 'docs/walking_talking'.
-  const myVideo = cld.video('docs/walking_talking');
+  const myVideo = cld.video(`clips/${file}`);
 
   // Apply the transformation.
   myVideo.resize(fill().width(267).height(150))
@@ -29,7 +31,7 @@ const VideoFile = () => {
   // Render the transformed video in a React component.
   return (
     <div>
-      <AdvancedVideo autoPlay cldVid={myVideo}/>
+      <AdvancedVideo muted autoPlay cldVid={myVideo}/>
     </div>
   )
 };
