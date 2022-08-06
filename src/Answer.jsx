@@ -5,8 +5,16 @@ export default function Answer({ onSubmit }) {
 
   const answer = useFormInput('')
 
+  function handleSubmit(event) {
+    event.preventDefault()
+    onSubmit(answer.value)
+  }
+
   return (
-    <input {...answer} onSubmit={onSubmit}></input>
+    <form onSubmit={handleSubmit}>
+      <input {...answer}></input>
+      <input type="submit" value="Submit" />
+    </form>
   )
 }
 

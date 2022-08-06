@@ -17,8 +17,8 @@ export default function Quizz() {
       })
   },[])
 
-  function handleSubmit(){
-    console.log(answer.value)
+  function handleSubmit(answer){
+    console.log(answer)
   }
 
   if (file) {
