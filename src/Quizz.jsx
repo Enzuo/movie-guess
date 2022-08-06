@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 
 import VideoFile from './components/VideoFile'
+import Answer from './Answer'
 
 
 export default function Quizz() {
@@ -14,11 +15,18 @@ export default function Quizz() {
         setFile(res.file)
         console.log(res)
       })
-  })
+  },[])
+
+  function handleSubmit(){
+    console.log(answer.value)
+  }
 
   if (file) {
     return (
-      <VideoFile file={file}></VideoFile>
+      <div>
+        <VideoFile file={file}></VideoFile>
+        <Answer onSubmit={handleSubmit}></Answer>
+      </div>
     )
   }
 
@@ -28,4 +36,3 @@ export default function Quizz() {
   )
 
 }
-
