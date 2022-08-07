@@ -1,4 +1,5 @@
 import express from 'express'
+import bodyParser from 'body-parser'
 import path from 'path'
 import http from 'http'
 import { Server } from 'socket.io'
@@ -17,6 +18,8 @@ io.on('connection', (socket) => {
   console.log('a user connected');
 });
 
+// Post data
+app.use(bodyParser.json()) // for parsing application/json
 
 // Set up static assets
 const assetsRouter = require("./server/assets-router");

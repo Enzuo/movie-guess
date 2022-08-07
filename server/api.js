@@ -18,7 +18,9 @@ router.get('/getQuestion', function (req, res) {
 })
 
 router.post('/answer', function (req, res) {
-
+    const {id, answer} = req.body
+    console.log(req.body)
+    res.json({test: 'test'})
 })
 
 // Logic 
