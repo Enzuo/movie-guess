@@ -1,4 +1,5 @@
 var express = require('express');
+const { checkAnswer } = require('./answer');
 var router = express.Router();
 
 
@@ -19,9 +20,24 @@ router.get('/getQuestion', function (req, res) {
 
 router.post('/answer', function (req, res) {
     const {id, answer} = req.body
-    console.log(req.body)
-    res.json({test: 'test'})
+    const title = dataClips[id].title
+    const result = checkAnswer(answer, title)
+
+    let score = answerScore(result)
+
+
+    res.json({score})
 })
+
+function answerScore(result){
+  if(result.missingWords == ''){
+    return 2
+  }
+  if(result.rightWords != ''){
+    return 1
+  }
+  return 0
+}
 
 // Logic 
 
