@@ -14,7 +14,7 @@ let winkOpts = { f: similarityScore.winklerMetaphone, options : {threshold: 0} }
 
 
 
-export function checkAnswer(proposition, rightAnswer){
+export function evaluateProposition(proposition, rightAnswer){
   // performance.mark('A')
   let answerWords = rightAnswer.split(' ')
   let propositionWords = proposition.split(' ')
@@ -26,13 +26,42 @@ export function checkAnswer(proposition, rightAnswer){
   // console.log(performance.getEntriesByType('measure')[0].duration)
   // performance.clearMarks()
   // performance.clearMeasures()
+  const { matchScore } = result
+  const matchLength = answerWords.map(a => a.length)
+  let totalLength = matchLength.reduce((l, a) => l + a, 0)
+  let totalScore = matchLength.reduce((score, a, i) => score + a * matchScore[i], 0)
+  const RIGHTSCORE = 0.7
   return {
     proposition,
-    matchScore: result.matchScore,
+    score : totalScore/totalLength,
+    matchScore: matchScore,    
     matchLength: answerWords.map(a => a.length),
-    rightWords: result.matchScore.reduce((str, score, i) => score >= 0.5 ? str.concat(answerWords[i]) : str, []).join(' '),
-    missingWords: result.matchScore.reduce((str, score, i) => score < 0.5 ? str.concat(answerWords[i]) : str, []).join(' '),
+    rightWords: result.matchScore.reduce((str, score, i) => score >= RIGHTSCORE ? str.concat(answerWords[i]) : str, []).join(' '),
+    missingWords: result.matchScore.reduce((str, score, i) => score < RIGHTSCORE ? str.concat(answerWords[i]) : str, []).join(' '),
   }
 }
 
-export default { checkAnswer }
+/**
+ * 
+ * @param {*} proposition 
+ * @param {*} answers 
+ * @returns {number} 0 really far
+ *          1 some similarity
+ *          2 similar
+ *          3 correct
+ */
+export function checkProposition(proposition, answers){
+  let possibleAnswers 
+  let answer = answers[0]
+  const { score } = evaluateProposition(proposition, answer)
+  console.log(proposition, score)
+  if(score > 0.8) {
+    return 3
+  }
+  if(score > 0.2){
+    return 2
+  }
+  return 0
+}
+
+export default { checkProposition }

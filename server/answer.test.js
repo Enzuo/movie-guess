@@ -1,34 +1,34 @@
 
-import { checkAnswer } from "./answer"
+import { checkProposition } from "./answer"
 
 const titles = ['mr bean', 'Ultimate disaster', 'Bean: The Movie']
 
 test('wrong proposition', () => {
-  let result = checkAnswer('hi world',titles[0])
+  let result = checkProposition('hi world',titles)
   console.log(result)
 });
 
 test('proposition with small typo', () => {
-  let result = checkAnswer('mr baen',titles[0])
+  let result = checkProposition('mr baen',titles)
   console.log(result)
 });
 
 test('proposition with small typo on a small word', () => {
-  let result = checkAnswer('m bean',titles[0])
+  let result = checkProposition('m bean',titles)
   console.log(result)
 });
 
 test('proposition with small typo on a small word', () => {
-  let result = checkAnswer('rm bean',titles[0])
+  let result = checkProposition('rm bean',titles)
   console.log(result)
 });
 
 test('proposition with twice a word', () => {
-  let result = checkAnswer('mr mr mr bean',titles[0])
+  let result = checkProposition('mr mr mr bean',titles)
   console.log(result)
 });
 
 test('right proposition', () => {
-  let result = checkAnswer('mr bean',titles[0])
+  let result = checkProposition('mr bean',titles)
   console.log(result)
 });
