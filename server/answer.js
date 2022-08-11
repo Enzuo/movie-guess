@@ -52,14 +52,20 @@ export function evaluateProposition(proposition, rightAnswer){
  */
 export function checkProposition(proposition, answers){
   let possibleAnswers 
-  let answer = answers[0]
-  const result = evaluateProposition(proposition, answer)
-  const { score } = result
-  console.log(proposition, score, result)
-  if(score > 0.8) {
+  // let answer = answers[0]
+  let maxScore = 0
+  answers.forEach(answer => {
+    const result = evaluateProposition(proposition, answer)
+    const { score } = result
+    console.log(proposition, score, result)
+    maxScore = Math.max(maxScore, score)
+  })
+
+
+  if(maxScore > 0.8) {
     return 3
   }
-  if(score > 0.2){
+  if(maxScore > 0.2){
     return 2
   }
   return 0

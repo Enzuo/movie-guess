@@ -36,4 +36,4 @@ const VideoFile = (props) => {
   )
 };
 
-export default VideoFile
+export default React.memo(VideoFile)
