@@ -53,8 +53,9 @@ export function evaluateProposition(proposition, rightAnswer){
 export function checkProposition(proposition, answers){
   let possibleAnswers 
   let answer = answers[0]
-  const { score } = evaluateProposition(proposition, answer)
-  console.log(proposition, score)
+  const result = evaluateProposition(proposition, answer)
+  const { score } = result
+  console.log(proposition, score, result)
   if(score > 0.8) {
     return 3
   }

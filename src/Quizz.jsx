@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useReducer} from 'react'
 
 import VideoFile from './components/VideoFile'
 import Answer from './Answer'
+import AnswerHistory from './components/presentation/AnswerHistory'
 
 
 export default function Quizz() {
 
   const [question, setQuestion] = useState({})
+  const [answers, addAnswer] = useReducer((state, a) => state.concat(a), [])
 
   useEffect(() => {
     fetch('api/getQuestion')
@@ -22,6 +24,7 @@ export default function Quizz() {
     postData('api/answer', { id : question.id, answer })
       .then((data) => {
         console.log(data)
+        addAnswer({text: answer, score: data.score})
       });
   }
 
@@ -30,6 +33,7 @@ export default function Quizz() {
       <div>
         <VideoFile file={question.file}></VideoFile>
         <Answer onSubmit={handleSubmit}></Answer>
+        <AnswerHistory answers={answers}></AnswerHistory>
       </div>
     )
   }

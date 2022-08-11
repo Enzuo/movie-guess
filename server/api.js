@@ -4,9 +4,9 @@ var router = express.Router();
 
 
 const dataClips = [
-    {title: "jibaro", file : "jibaro2_nqjs1w"},
-    {title: "mr bean ultimate disaster", file : "ultimatedisaster"},
-    {title: "idiocracy", file : "idiocracyiq"},
+    {title: ["jibaro"], file : "jibaro2_nqjs1w"},
+    {title: ["mr bean ultimate disaster"], file : "ultimatedisaster"},
+    {title: ["idiocracy"], file : "idiocracyiq"},
 ]
 
 router.get('/', function (req, res) {
