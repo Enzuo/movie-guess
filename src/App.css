@@ -44,6 +44,9 @@ button {
 
 
 
+input[class="choice-radio"]:checked + div {
+  color:orange;
+}
 
 .gender-choice {
   font-family: monospace;

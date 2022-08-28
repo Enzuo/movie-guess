@@ -10,7 +10,7 @@ export default function UserEdit ({user, onEdit}) {
       <Number value={user.age} onChange={(age) => onEdit({...user, age})}>
 
       </Number>
-      <GenderPicker onPick={(gender) => onEdit({...user, gender})}>
+      <GenderPicker value={user.gender} onPick={(gender) => onEdit({...user, gender})}>
 
       </GenderPicker>
     </div>
@@ -25,35 +25,38 @@ function Number ({value, onChange}) {
   )
 }
 
-function GenderPicker ({onPick}) {
+function GenderPicker ({value, onPick}) {
 
   const choices = [{ label : '♀️' }, {label: '♂️'}, {label: '⚧️'}]
-  const [selectedIndex, setSelected] = useState()
+  // const [selectedIndex, setSelected] = useState()
 
   function handleSelect(index) {
-    setSelected(index)
+    // setSelected(index)
     onPick(index)
   }
 
-  function handleKeyDown(e){
-    console.log('key down', e.keyCode)
-  }
-
   return (
-    <div tabIndex="0" onKeyDown={handleKeyDown}>
-      {choices.map((a, i) => (
-        <GenderChoice key={i} onSelect={() => handleSelect(i)} isSelected={selectedIndex === i} {...a}>
+    <div>
+      <div>
+        {choices.map((a, i) => (
+          <GenderChoice id={i} key={i} onSelect={() => handleSelect(i)} isSelected={value === i} {...a}>
 
-        </GenderChoice>
-      ))}
+          </GenderChoice>
+        ))}
+      </div>
     </div>
   )
 }
 
-function GenderChoice ({label, onSelect, isSelected}) {
+function GenderChoice ({id, label, onSelect, isSelected}) {
   const style = isSelected ? {color : 'orange'} : {}
 
   return (
-    <div className="gender-choice" style={style} onClick={onSelect}>{label}</div>
+    <label htmlFor={"gender-" + id}>
+      <input type="radio" className="choice-radio" checked={isSelected} name="gender-choice" id={"gender-" + id} value={id} onChange={() => onSelect(id)} />
+      <div className="gender-choice" style={style} onClick={onSelect}>
+        {label}
+      </div>
+    </label>
   )
 }
