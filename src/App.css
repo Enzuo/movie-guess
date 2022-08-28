@@ -40,3 +40,15 @@
 button {
   font-size: calc(10px + 2vmin);
 }
+
+
+
+
+
+.choice {
+  font-family: monospace;
+  font-size: 25px;
+  display:inline;
+  margin:12px;
+  cursor:pointer;
+}
