@@ -35,8 +35,12 @@ function GenderPicker ({onPick}) {
     onPick(index)
   }
 
+  function handleKeyDown(e){
+    console.log('key down', e.keyCode)
+  }
+
   return (
-    <div>
+    <div tabIndex="0" onKeyDown={handleKeyDown}>
       {choices.map((a, i) => (
         <GenderChoice key={i} onSelect={() => handleSelect(i)} isSelected={selectedIndex === i} {...a}>
 
