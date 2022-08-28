@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { GENDERS } from "../logic/user"
 
 export default function UserEdit ({user, onEdit}) {
   if(!user){
@@ -19,7 +20,7 @@ export default function UserEdit ({user, onEdit}) {
 
 function Number ({value, onChange}) {
   return (
-    <input type="number" value={value} onChange={(e) => onChange(parseInt(e.target.value))}>
+    <input min="0" max="100" type="number" value={value} onChange={(e) => onChange(parseInt(e.target.value))}>
     
     </input>
   )
@@ -27,7 +28,7 @@ function Number ({value, onChange}) {
 
 function GenderPicker ({value, onPick}) {
 
-  const choices = [{ label : '♀️' }, {label: '♂️'}, {label: '⚧️'}]
+  const choices = GENDERS
   // const [selectedIndex, setSelected] = useState()
 
   function handleSelect(index) {

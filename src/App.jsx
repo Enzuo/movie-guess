@@ -3,7 +3,7 @@ import io from 'socket.io-client'
 import logo from './logo.svg'
 import './App.css'
 import Quizz from './Quizz'
-import UserEdit from './UserEdit'
+import UserEdit from './components/UserEdit'
 import {createUser} from './logic/user'
 
 function App() {

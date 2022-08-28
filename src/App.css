@@ -48,6 +48,11 @@ input[class="choice-radio"]:checked + div {
   color:orange;
 }
 
+input[class="choice-radio"] {
+  position: absolute;
+  opacity: 0;
+}
+
 .gender-choice {
   font-family: monospace;
   font-size: 25px;
