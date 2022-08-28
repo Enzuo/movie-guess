@@ -5,7 +5,7 @@ export const GENDERS = [{ label : '♀️' }, {label: '♂️'}, {label: '⚧️
 export function createUser() {
   return {
     id : uniqueId++,
-    name : '',
+    name : 'username',
     gender : null,
     age : null,
   }

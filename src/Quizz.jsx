@@ -3,12 +3,19 @@ import { useState, useEffect, useReducer} from 'react'
 import VideoFile from './components/VideoFile'
 import Answer from './Answer'
 import AnswerHistory from './components/presentation/AnswerHistory'
+import {createUser} from './logic/user'
+import { UserList } from './components/UserList'
+import UserEdit from './components/UserEdit'
+
 
 
 export default function Quizz() {
 
   const [question, setQuestion] = useState({})
   const [answers, addAnswer] = useReducer((state, a) => state.concat(a), [])
+  const [users, setUsers] = useState([createUser()])
+  const [userEditIndex, setUserEdit] = useState()
+
 
   useEffect(() => {
     fetch('api/getQuestion')
@@ -28,12 +35,33 @@ export default function Quizz() {
       });
   }
 
+  function handleAddUser(){
+    setUsers((state) => state.concat(createUser()))
+  }
+
+  function handleEditUser(index){
+    console.log('edit user', index)
+    setUserEdit(index)
+  }
+
+
+  function handleUserEdit(user){
+    console.log('user got edited', user)
+    users[userEditIndex] = user
+    setUsers(users)
+  }
+
+  let userEdit = userEditIndex !== null ? <UserEdit user={users[userEditIndex]} onEdit={handleUserEdit}></UserEdit> : null
+
+
   if (question) {
     return (
       <div>
         <VideoFile file={question.file}></VideoFile>
         <Answer onSubmit={handleSubmit}></Answer>
         <AnswerHistory answers={answers}></AnswerHistory>
+        <UserList users={users} onAdd={handleAddUser} onEdit={handleEditUser}></UserList>
+        {userEdit}
       </div>
     )
   }
