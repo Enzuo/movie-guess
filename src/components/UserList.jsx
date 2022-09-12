@@ -1,6 +1,6 @@
 import { GENDERS } from "../logic/user"
 
-export function UserList ({users, onAdd, onEdit}) {
+export default function UserList ({users, onAdd, onEdit}) {
 
   function handleAdd(){
     onAdd()

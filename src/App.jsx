@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react'
 import io from 'socket.io-client'
 import logo from './logo.svg'
 import './App.css'
-import Quizz from './Quizz'
+import Quizz from './components/Quizz'
 import UserEdit from './components/UserEdit'
+import AppMain from './components/AppMain'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -15,7 +16,7 @@ function App() {
 
   return (
     <div className="App">
-      <Quizz></Quizz>
+      <AppMain></AppMain>
     </div>
   )
 }

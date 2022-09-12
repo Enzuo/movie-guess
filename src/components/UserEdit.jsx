@@ -19,8 +19,16 @@ export default function UserEdit ({user, onEdit}) {
 }
 
 function Number ({value, onChange}) {
+  console.log('number', value)
+  let val = value !== null ? value : ''
+
+  function handleChange (e) {
+    onChange(parseInt(e.target.value))
+    // val = e.target.value
+  }
+
   return (
-    <input min="0" max="100" type="number" value={value} onChange={(e) => onChange(parseInt(e.target.value))}>
+    <input min="0" max="100" type="number" value={val} onChange={handleChange}>
     
     </input>
   )
