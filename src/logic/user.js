@@ -10,3 +10,15 @@ export function createUser() {
     age : null,
   }
 }
+
+export function saveUser(user, users){
+  let indexUser = users.findIndex(u => u.id === user.id)
+  if(indexUser >= 0){
+    users[indexUser] = user
+  }
+  else {
+    users.push(user)
+  }
+  
+  return users
+}

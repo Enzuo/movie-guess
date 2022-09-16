@@ -8,6 +8,7 @@ export default function UserEdit ({user, onEdit}) {
   return(
     <div>
       User
+      <input type="text" value={user.name} onChange={(e) => onEdit({...user, name : e.target.value})}></input>
       <Number value={user.age} onChange={(age) => onEdit({...user, age})}>
 
       </Number>
