@@ -60,3 +60,17 @@ input[class="choice-radio"] {
   margin:12px;
   cursor:pointer;
 }
+
+.user {
+  border:1px solid;
+  width:100px;
+  float:right;
+}
+
+.user button{
+  font-size: 9px;
+}
+
+.user.selected{
+  border-color: #f00;
+}

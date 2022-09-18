@@ -7,12 +7,12 @@ export default function UserEdit ({user, onEdit}) {
   }
   return(
     <div>
-      User
+      Name : 
       <input type="text" value={user.name} onChange={(e) => onEdit({...user, name : e.target.value})}></input>
-      <Number value={user.age} onChange={(age) => onEdit({...user, age})}>
+      Age : <Number value={user.age} onChange={(age) => onEdit({...user, age})}>
 
       </Number>
-      <GenderPicker value={user.gender} onPick={(gender) => onEdit({...user, gender})}>
+      Gender : <GenderPicker value={user.gender} onPick={(gender) => onEdit({...user, gender})}>
 
       </GenderPicker>
     </div>
@@ -69,4 +69,8 @@ function GenderChoice ({id, label, onSelect, isSelected}) {
       </div>
     </label>
   )
+}
+
+function CountryPicker () {
+
 }

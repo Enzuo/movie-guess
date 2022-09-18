@@ -1,6 +1,9 @@
+import { useState } from "react"
 import { GENDERS } from "../logic/user"
 
-export default function UserList ({users, onAdd, onEdit}) {
+export default function UserList ({users, onAdd, onEdit, onSelect}) {
+
+  const [selectedIndex, setSelected] = useState(null)
 
   function handleAdd(){
     onAdd()
@@ -10,11 +13,16 @@ export default function UserList ({users, onAdd, onEdit}) {
     onEdit(index)
   }
 
+  function handleSelect(index){
+    setSelected(index)
+    onSelect()
+  }
+
 
 
   return (
     <div>
-      {users.map((u, i) => <User onClick={() => handleEdit(i)} key={i} user={u}></User>)}
+      {users.map((u, i) => <User selected={selectedIndex === i}onClick={() => handleSelect(i)} onEditClick={() => handleEdit(i)} key={i} user={u}></User>)}
       <button onClick={handleAdd}>Add</button>
     </div>
   )
@@ -23,13 +31,20 @@ export default function UserList ({users, onAdd, onEdit}) {
 
 }
 
-function User({user, onClick}) {
+function User({user, selected, onEditClick, onClick}) {
+  let className = selected ? "user selected" : "user"
+
+  function handleEditClick(e) {
+    e.stopPropagation()
+    onEditClick()
+  }
+
   return (
-    <div>
+    <div className={className} onClick={onClick}>
       Name : {user.name}
       Age : {user.age}
       <Gender value={user.gender}></Gender>
-      <button onClick={() => onClick()}>Edit</button>
+      <button onClick={handleEditClick}>Edit</button>
     </div>
   )
 }
