@@ -1,21 +1,21 @@
 import { useState } from "react"
 import { GENDERS } from "../logic/user"
 
-export default function UserList ({users, onAdd, onEdit, onSelect}) {
+export default function UserList ({users, onAddClick, onEditClick, onSelect}) {
 
   const [selectedIndex, setSelected] = useState(null)
 
   function handleAdd(){
-    onAdd()
+    onAddClick()
   }
 
   function handleEdit(index){
-    onEdit(index)
+    onEditClick(index)
   }
 
   function handleSelect(index){
     setSelected(index)
-    onSelect()
+    onSelect(users[index])
   }
 
 

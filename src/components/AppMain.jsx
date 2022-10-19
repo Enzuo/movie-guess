@@ -12,29 +12,33 @@ function AppMain() {
   const [users, setUsers] = useState([createUser()])
   const [editUser, setEditUser] = useState(null)
 
-  function handleAddUser(){
+  function handleUserAddClick(){
     setUsers((state) => state.concat(createUser()))
   }
 
-  function handleEditUser(index){
+  function handleUserEditClick(index){
     console.log('edit user', index)
     setEditUser(users[index])
   }
 
 
-  function handleSaveUser(user){
+  function handleUserSave(user){
     console.log('user got edited', user)
     setEditUser(user)
     // users[userEditIndex] = user
     setUsers(saveUser(user, users))
   }
 
-  let userEdit = editUser !== null ? <UserEdit user={editUser} onEdit={handleSaveUser}></UserEdit> : null
+  function handleUserSelect(user){
+    // launch quizz with selected user
+  }
+
+  let userEdit = editUser !== null ? <UserEdit user={editUser} onEdit={handleUserSave}></UserEdit> : null
 
 
   return (
     <div>
-      <UserList users={users} onAdd={handleAddUser} onEdit={handleEditUser}></UserList>
+      <UserList users={users} onAddClick={handleUserAddClick} onEditClick={handleUserEditClick} onSelect={handleUserSelect}></UserList>
         {userEdit}
       <Quizz></Quizz>
     </div>
