@@ -6,11 +6,11 @@ import UserEdit from "./UserEdit"
 import Quizz from "./Quizz"
 
 
-
 function AppMain() {
 
   const [users, setUsers] = useState([createUser()])
   const [editUser, setEditUser] = useState(null)
+  const [gameState, setGameState] = useState({})
 
   function handleUserAddClick(){
     setUsers((state) => state.concat(createUser()))
@@ -31,6 +31,7 @@ function AppMain() {
 
   function handleUserSelect(user){
     // launch quizz with selected user
+    setGameState({user, quizz: true})
   }
 
   let userEdit = editUser !== null ? <UserEdit user={editUser} onEdit={handleUserSave}></UserEdit> : null
@@ -40,7 +41,7 @@ function AppMain() {
     <div>
       <UserList users={users} onAddClick={handleUserAddClick} onEditClick={handleUserEditClick} onSelect={handleUserSelect}></UserList>
         {userEdit}
-      <Quizz></Quizz>
+      {gameState.quizz === true && <Quizz user={gameState.user}></Quizz>}
     </div>
   )
 }

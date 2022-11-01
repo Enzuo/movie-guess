@@ -3,7 +3,7 @@ import { GENDERS } from "../logic/user"
 
 export default function UserList ({users, onAddClick, onEditClick, onSelect}) {
 
-  const [selectedIndex, setSelected] = useState(null)
+  const [highlightedIndex, setHiglighted] = useState(null)
 
   function handleAdd(){
     onAddClick()
@@ -13,16 +13,18 @@ export default function UserList ({users, onAddClick, onEditClick, onSelect}) {
     onEditClick(index)
   }
 
-  function handleSelect(index){
-    setSelected(index)
-    onSelect(users[index])
+  function handleClick(index){
+    if(highlightedIndex === index){
+      onSelect(users[index])
+    }
+    setHiglighted(index)
   }
 
 
 
   return (
     <div>
-      {users.map((u, i) => <User selected={selectedIndex === i}onClick={() => handleSelect(i)} onEditClick={() => handleEdit(i)} key={i} user={u}></User>)}
+      {users.map((u, i) => <User selected={highlightedIndex === i} onClick={() => handleClick(i)} onEditClick={() => handleEdit(i)} key={i} user={u}></User>)}
       <button onClick={handleAdd}>Add</button>
     </div>
   )
