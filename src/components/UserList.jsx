@@ -25,7 +25,7 @@ export default function UserList ({users, onAddClick, onEditClick, onSelect}) {
   return (
     <div>
       {users.map((u, i) => <User selected={highlightedIndex === i} onClick={() => handleClick(i)} onEditClick={() => handleEdit(i)} key={i} user={u}></User>)}
-      <button onClick={handleAdd}>Add</button>
+      <button onClick={handleAdd}>Add user</button>
     </div>
   )
 
@@ -46,7 +46,7 @@ function User({user, selected, onEditClick, onClick}) {
       Name : {user.name}
       Age : {user.age}
       <Gender value={user.gender}></Gender>
-      <button onClick={handleEditClick}>Edit</button>
+      <button onClick={handleEditClick}>Edit user</button>
     </div>
   )
 }

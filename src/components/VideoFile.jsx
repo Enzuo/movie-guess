@@ -14,14 +14,16 @@ const VideoFile = (props) => {
   // Create and configure your Cloudinary instance.
   const cld = new Cloudinary({
     cloud: {
-      cloudName: 'dnv2xywfm'
-    }
+      cloudName: 'dnv2xywfm',
+    },
   }); 
 
   const {file} = props
 
   // Use the video with public ID, 'docs/walking_talking'.
   const myVideo = cld.video(`clips/${file}`);
+  console.log(myVideo)
+  // myVideo.
 
   // Apply the transformation.
   myVideo.resize(fill().width(267).height(150))
@@ -31,7 +33,7 @@ const VideoFile = (props) => {
   // Render the transformed video in a React component.
   return (
     <div>
-      <AdvancedVideo muted autoPlay cldVid={myVideo}/>
+      <AdvancedVideo muted autoPlay cldVid={myVideo} onError={(err) => {console.log('video error', err)}}/>
     </div>
   )
 };
