@@ -10,8 +10,6 @@ export default function Quizz({user}) {
 
   const [question, setQuestion] = useState({})
   const [answersHistory, addAnswerToHistory] = useReducer((state, a) => state.concat(a), [])
-  const [answerStatus, setAnswerStatus] = useState()
-  const [answerId, gotAnswer] = useReducer((state) => state + 1, 0)
 
   useEffect(() => {
     fetch('api/getQuestion')
@@ -27,8 +25,6 @@ export default function Quizz({user}) {
     postData('api/answer', { id : question.id, answer })
       .then((data) => {
         console.log(data)
-        gotAnswer(1)
-        setAnswerStatus(data.score)
         addAnswerToHistory({text: answer, score: data.score})
       });
   }
@@ -41,7 +37,7 @@ export default function Quizz({user}) {
       <div>
         <VideoFile file={question.file}></VideoFile>
         <Answer onSubmit={handleSubmit}></Answer>
-        <AnswerStatus key={answerId} status={answerStatus}></AnswerStatus>
+        <AnswerStatus answers={answersHistory}></AnswerStatus>
         <AnswerHistory answers={answersHistory}></AnswerHistory>
         <TestNull></TestNull>
       </div>
@@ -54,20 +50,22 @@ export default function Quizz({user}) {
   )
 }
 
-function AnswerStatus ({status}) {
+
+function AnswerStatus ({answers}) {
 
   let [isVisible, setVisible] = useState(true)
   useEffect(() => {
+    setVisible(true)
     const timer = setTimeout(() => {
       setVisible(false)
     }, 3000)
     return () => clearTimeout(timer)
-  })
-  if(!isVisible){
+  }, [answers.length])
+  if(!isVisible || !answers || !answers.length){
     return <div> no status </div>
   }
   return (
-    <div>{status}</div>
+    <div>{answers[answers.length -1].score}</div>
   )
 }
 
