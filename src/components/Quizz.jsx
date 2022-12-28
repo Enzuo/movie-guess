@@ -2,6 +2,7 @@ import { useState, useEffect, useReducer} from 'react'
 
 import VideoFile from './VideoFile'
 import Answer from './Answer'
+import AnswerStatus from './AnswerStatus'
 import AnswerHistory from './presentation/AnswerHistory'
 
 
@@ -47,25 +48,6 @@ export default function Quizz({user}) {
   return (
     <div>
     </div>
-  )
-}
-
-
-function AnswerStatus ({answers}) {
-
-  let [isVisible, setVisible] = useState(true)
-  useEffect(() => {
-    setVisible(true)
-    const timer = setTimeout(() => {
-      setVisible(false)
-    }, 3000)
-    return () => clearTimeout(timer)
-  }, [answers.length])
-  if(!isVisible || !answers || !answers.length){
-    return <div> no status </div>
-  }
-  return (
-    <div>{answers[answers.length -1].score}</div>
   )
 }
 
