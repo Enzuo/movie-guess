@@ -3,7 +3,7 @@ import { useState } from "react"
 import {createUser, saveUser} from '../logic/user'
 import UserList from "./UserList"
 import UserEdit from "./UserEdit"
-import Quizz from "./Quizz"
+import Game from "./Game"
 
 
 function AppMain() {
@@ -41,7 +41,7 @@ function AppMain() {
     <div>
       <UserList users={users} onAddClick={handleUserAddClick} onEditClick={handleUserEditClick} onSelect={handleUserSelect}></UserList>
         {userEdit}
-      {gameState.quizz === true && <Quizz user={gameState.user}></Quizz>}
+      {gameState.quizz === true && <Game user={gameState.user}></Game>}
     </div>
   )
 }

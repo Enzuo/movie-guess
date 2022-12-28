@@ -7,7 +7,7 @@ import AnswerHistory from './presentation/AnswerHistory'
 
 
 
-export default function Quizz({user}) {
+export default function Game({user}) {
 
   const [question, setQuestion] = useState({})
   const [answersHistory, addAnswerToHistory] = useReducer((state, a) => state.concat(a), [])
