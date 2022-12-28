@@ -1,6 +1,13 @@
 var express = require('express');
+var bodyParser = require('body-parser')
 const { checkAnswer, checkProposition } = require('./answer');
-var router = express.Router();
+var router = express();
+
+// parse application/x-www-form-urlencoded
+router.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+router.use(bodyParser.json())
 
 
 const dataClips = [
@@ -14,8 +21,19 @@ router.get('/', function (req, res) {
 })
 
 router.get('/getQuestion', function (req, res) {
-    const question = getAQuestion(dataClips)
+    const question = pickAQuestion(dataClips)
     res.json({id: question.id, file: question.file })
+})
+
+// TODO shouldn't be able to get answer unless quizz is over
+router.get('/getAnswer', function (req, res) {
+  let clipId = req.query.id
+  console.log("clipId ?", clipId, typeof clipId)
+  if(clipId === 'undefined'){
+    return res.status(400).send()
+  }
+  const clip = dataClips[clipId] // dataClips.find((clip) => clip.id === clipId)
+  res.json({id: clipId, title: clip.title })
 })
 
 router.post('/answer', function (req, res) {
@@ -29,7 +47,7 @@ router.post('/answer', function (req, res) {
 
 // Logic 
 
-function getAQuestion(data){
+function pickAQuestion(data){
     let id = Math.floor(Math.random()*data.length)
     return {id: id, file: data[id].file }
 }

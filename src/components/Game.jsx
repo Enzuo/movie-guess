@@ -21,6 +21,10 @@ export default function Game({user}) {
       })
   },[])
 
+  useEffect(() => {
+    fetch('api/getAnswer?id='+question.id)
+  }, [question])
+
   function handleSubmit(answer){
     console.log(answer)
     postData('api/answer', { id : question.id, answer })
