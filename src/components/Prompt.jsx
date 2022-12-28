@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 
-export default function Answer({ onSubmit }) {
+export default function Prompt({ onSubmit }) {
 
   const answer = useFormInput('')
 

@@ -1,7 +1,7 @@
 import { useState, useEffect, useReducer} from 'react'
 
 import VideoFile from './VideoFile'
-import Answer from './Answer'
+import Prompt from './Prompt'
 import AnswerStatus from './AnswerStatus'
 import AnswerHistory from './presentation/AnswerHistory'
 
@@ -10,6 +10,7 @@ import AnswerHistory from './presentation/AnswerHistory'
 export default function Game({user}) {
 
   const [question, setQuestion] = useState({})
+  const [answer, setAnswer] = useState({})
   const [answersHistory, addAnswerToHistory] = useReducer((state, a) => state.concat(a), [])
 
   useEffect(() => {
@@ -22,7 +23,15 @@ export default function Game({user}) {
   },[])
 
   useEffect(() => {
-    fetch('api/getAnswer?id='+question.id)
+    console.log('fetch answer after 45s')
+    const timer = setTimeout(() => {
+      fetch('api/getAnswer?id='+question.id)
+        .then(res => res.json())
+        .then(res => {
+          setAnswer(res)
+        })
+    }, 4500)
+    return () => clearTimeout(timer)
   }, [question])
 
   function handleSubmit(answer){
@@ -40,10 +49,15 @@ export default function Game({user}) {
   if (question) {
     return (
       <div>
-        <VideoFile file={question.file}></VideoFile>
-        <Answer onSubmit={handleSubmit}></Answer>
-        <AnswerStatus answers={answersHistory}></AnswerStatus>
-        <AnswerHistory answers={answersHistory}></AnswerHistory>
+        <div className="question">
+          <VideoFile file={question.file}></VideoFile>
+          <Answer d={answer}></Answer>
+        </div>
+        <div className="answer">
+          <Prompt onSubmit={handleSubmit}></Prompt>
+          <AnswerStatus answers={answersHistory}></AnswerStatus>
+          <AnswerHistory answers={answersHistory}></AnswerHistory>
+        </div>
         <TestNull></TestNull>
       </div>
     )
@@ -52,6 +66,15 @@ export default function Game({user}) {
   return (
     <div>
     </div>
+  )
+}
+
+function Answer({d}){
+  if(!d.title){
+    return null
+  }
+  return (
+    <div>Title : {d.title}</div>
   )
 }
 
