@@ -10,7 +10,7 @@ function AppMain() {
 
   const [users, setUsers] = useState([createUser()])
   const [editUser, setEditUser] = useState(null)
-  const [gameState, setGameState] = useState({})
+  const [gameState, setGameState] = useState({isStarted: false, set:0})
 
   function handleUserAddClick(){
     setUsers((state) => state.concat(createUser()))
@@ -30,8 +30,14 @@ function AppMain() {
   }
 
   function handleUserSelect(user){
-    // launch quizz with selected user
-    setGameState({user, quizz: true})
+    // launch new game with selected user
+    if(!gameState.isStarted){
+      setGameState({user, isStarted: true, set : gameState.set + 1})
+    }
+  }
+
+  function handleGameEnd(){
+    setGameState(Object.assign(gameState, {isStarted: false}))
   }
 
   let userEdit = editUser !== null ? <UserEdit user={editUser} onEdit={handleUserSave}></UserEdit> : null
@@ -41,7 +47,7 @@ function AppMain() {
     <div>
       <UserList users={users} onAddClick={handleUserAddClick} onEditClick={handleUserEditClick} onSelect={handleUserSelect}></UserList>
         {userEdit}
-      {gameState.quizz === true && <Game user={gameState.user}></Game>}
+      <Game user={gameState.user} set={gameState.set} onGameEnd={handleGameEnd}></Game>
     </div>
   )
 }

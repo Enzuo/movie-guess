@@ -7,20 +7,23 @@ import AnswerHistory from './presentation/AnswerHistory'
 
 
 
-export default function Game({user}) {
+export default function Game({user, set, onGameEnd}) {
 
   const [question, setQuestion] = useState({})
   const [answer, setAnswer] = useState({})
   const [answersHistory, addAnswerToHistory] = useReducer((state, a) => state.concat(a), [])
 
   useEffect(() => {
+    if(!set){
+      return
+    }
     fetch('api/getQuestion')
       .then(res => res.json())
       .then(res => {
         setQuestion(res)
         console.log('got new question', res)
       })
-  },[])
+  },[set])
 
   useEffect(() => {
     console.log('fetch answer after 45s')
@@ -30,6 +33,8 @@ export default function Game({user}) {
         .then(res => {
           setAnswer(res)
         })
+      //
+      onGameEnd()
     }, 4500)
     return () => clearTimeout(timer)
   }, [question])
