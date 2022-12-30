@@ -4,11 +4,12 @@ import {createUser, saveUser} from '../logic/user'
 import UserList from "./UserList"
 import UserEdit from "./UserEdit"
 import Game from "./Game"
+import { useLocalStorage } from "../hooks/localStorage"
 
 
 function AppMain() {
 
-  const [users, setUsers] = useState([createUser()])
+  const [users, setUsers] = useLocalStorage('users', [createUser()])
   const [editUser, setEditUser] = useState(null)
   const [gameState, setGameState] = useState({isStarted: false, set:0})
 
