@@ -2,6 +2,7 @@ import { useState, useEffect, useReducer} from 'react'
 
 import VideoFile from './VideoFile'
 import Prompt from './Prompt'
+import Poster from './Poster'
 import AnswerStatus from './AnswerStatus'
 import AnswerHistory from './presentation/AnswerHistory'
 
@@ -79,7 +80,10 @@ function Answer({d}){
     return null
   }
   return (
-    <div>Title : {d.title}</div>
+    <div>
+      <Poster file={d.poster}></Poster>
+      <div>Title : {d.title}</div>
+    </div>
   )
 }
 

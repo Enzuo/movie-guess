@@ -11,9 +11,9 @@ router.use(bodyParser.json())
 
 
 const dataClips = [
-    {title: ["jibaro"], file : "jibaro2_nqjs1w"},
-    {title: ["mr bean ultimate disaster"], file : "ultimatedisaster"},
-    {title: ["idiocracy"], file : "idiocracyiq"},
+    {title: ["jibaro"], file : "jibaro2_nqjs1w", poster : "lovedeathrobots"},
+    {title: ["mr bean ultimate disaster"], file : "ultimatedisaster", poster : "mrbean"},
+    {title: ["idiocracy"], file : "idiocracyiq", poster : "idiocracy"},
 ]
 
 router.get('/', function (req, res) {
@@ -33,7 +33,7 @@ router.get('/getAnswer', function (req, res) {
     return res.status(400).send()
   }
   const clip = dataClips[clipId] // dataClips.find((clip) => clip.id === clipId)
-  res.json({id: clipId, title: clip.title })
+  res.json({id: clipId, title: clip.title, poster : clip.poster })
 })
 
 router.post('/answer', function (req, res) {
