@@ -5,10 +5,11 @@ import Prompt from './Prompt'
 import Poster from './Poster'
 import AnswerStatus from './AnswerStatus'
 import AnswerHistory from './presentation/AnswerHistory'
+import CountdownTimer from './CountDownTimer'
 
 
 
-export default function Game({user, round, onGameEnd}) {
+export default function Game({user, round, onGameEnd, timeEnd}) {
 
   const [question, setQuestion] = useState({})
   const [answer, setAnswer] = useState({})
@@ -36,11 +37,15 @@ export default function Game({user, round, onGameEnd}) {
         .then(res => {
           setAnswer(res)
         })
-      // TODO debug old state
-      onGameEnd(score)
+      // TODO fix stale closure
+      gameEnd()
     }, 10000)
     return () => clearTimeout(timer)
   }, [question])
+
+  function gameEnd(){
+    onGameEnd(score)
+  }
 
   function handleSubmit(answer){
     console.log(answer)
@@ -62,6 +67,7 @@ export default function Game({user, round, onGameEnd}) {
       <div>
         <div className="question">
           <VideoFile file={question.file}></VideoFile>
+          <CountdownTimer targetTime={timeEnd}></CountdownTimer>
           <Answer d={answer}></Answer>
         </div>
         <div className="answer">

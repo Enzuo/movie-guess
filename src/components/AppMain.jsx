@@ -31,9 +31,19 @@ function AppMain() {
   }
 
   function handleUserSelect(user){
+    startGame(user)
+  }
+
+  function startGame(user){
     // launch new game with selected user
+    const ROUND_TIME = 10000
     if(!gameState.isStarted){
-      setGameState({user, isStarted: true, round : gameState.round + 1})
+      setGameState({
+        user, 
+        timeEnd: new Date().getTime() + ROUND_TIME, 
+        isStarted: true, 
+        round : gameState.round + 1
+      })
     }
   }
 
@@ -51,7 +61,7 @@ function AppMain() {
     <div>
       <UserList users={users} onAddClick={handleUserAddClick} onEditClick={handleUserEditClick} onSelect={handleUserSelect}></UserList>
         {userEdit}
-      <Game user={gameState.user} round={gameState.round} onGameEnd={handleGameEnd}></Game>
+      <Game timeEnd={gameState.timeEnd} user={gameState.user} round={gameState.round} onGameEnd={handleGameEnd}></Game>
     </div>
   )
 }
