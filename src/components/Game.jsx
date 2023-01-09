@@ -12,9 +12,10 @@ import CountdownTimer from './CountDownTimer'
 export default function Game({user, round, onGameEnd, timeEnd}) {
 
   const [question, setQuestion] = useState({})
-  const [answer, setAnswer] = useState({})
+  // const [answer, setAnswer] = useState({})
   const [score, setScore] = useState(0)
   const [promptsHistory, addPromptToHistory] = useReducer((state, a) => state.concat(a), [])
+  const [roundsHistory, addRoundToHistory] = useReducer((state, a) => state.concat(a), [])
 
   useEffect(() => {
     if(!round){
@@ -35,7 +36,7 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
       fetch('api/getAnswer?id='+question.id)
         .then(res => res.json())
         .then(res => {
-          setAnswer(res)
+          addRoundToHistory(res)
         })
       // TODO fix stale closure
       gameEnd()
@@ -68,12 +69,12 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
         <div className="question">
           <VideoFile file={question.file}></VideoFile>
           <CountdownTimer targetTime={timeEnd}></CountdownTimer>
-          <Answer d={answer}></Answer>
+          <RoundHistory history={roundsHistory}></RoundHistory>
         </div>
         <div className="answer">
           <Prompt onSubmit={handleSubmit}></Prompt>
           <AnswerStatus answers={promptsHistory}></AnswerStatus>
-          <PromptHistory prompts={promptsHistory}></PromptHistory>
+          <PromptHistory history={promptsHistory}></PromptHistory>
         </div>
         <TestNull></TestNull>
       </div>
@@ -82,6 +83,17 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
 
   return (
     <div>
+    </div>
+  )
+}
+
+function RoundHistory({history}){
+  return (
+    <div>
+      Answers
+      <ul>
+        { reverseMap( history, (d, index) => (<li key={index}><Answer d={d}></Answer></li>) )}
+      </ul>
     </div>
   )
 }
@@ -109,6 +121,21 @@ function TestNull(){
   )
 }
 
+/*
+ * 
+ * Helpers 
+ * 
+ * 
+ */
+
+function reverseMap(array, cb){
+  let output = []
+  for(let i=array.length-1; i >= 0; i--){
+    let result = cb(array[i], i)
+    output.push(result)
+  }
+  return output
+}
 
 async function postData(url = '', data = {}) {
   // Default options are marked with *

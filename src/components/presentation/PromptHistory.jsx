@@ -1,10 +1,10 @@
-export default function PromptHistory({ prompts }) {
+export default function PromptHistory({ history }) {
 
   return (
     <div>
       History
       <ul>
-        { prompts.map( (a, index) => <li key={index}>{a.text} {a.score}</li>)}
+        { history.map( (a, index) => <li key={index}>{a.text} {a.score}</li>)}
       </ul>
     </div>
   )
