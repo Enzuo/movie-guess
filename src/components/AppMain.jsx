@@ -11,7 +11,7 @@ function AppMain() {
 
   const [users, setUsers] = useLocalStorage('users', [createUser()])
   const [editUser, setEditUser] = useState(null)
-  const [gameState, setGameState] = useState({isStarted: false, set:0})
+  const [gameState, setGameState] = useState({isStarted: false, round:0})
 
   function handleUserAddClick(){
     setUsers((state) => state.concat(createUser()))
@@ -33,11 +33,14 @@ function AppMain() {
   function handleUserSelect(user){
     // launch new game with selected user
     if(!gameState.isStarted){
-      setGameState({user, isStarted: true, set : gameState.set + 1})
+      setGameState({user, isStarted: true, round : gameState.round + 1})
     }
   }
 
-  function handleGameEnd(){
+  function handleGameEnd(score){
+    console.log('got score', score)
+    gameState.user.score  = gameState.user.score ? gameState.user.score + score : score
+    setUsers(saveUser(gameState.user, users))
     setGameState(Object.assign(gameState, {isStarted: false}))
   }
 
@@ -48,7 +51,7 @@ function AppMain() {
     <div>
       <UserList users={users} onAddClick={handleUserAddClick} onEditClick={handleUserEditClick} onSelect={handleUserSelect}></UserList>
         {userEdit}
-      <Game user={gameState.user} set={gameState.set} onGameEnd={handleGameEnd}></Game>
+      <Game user={gameState.user} round={gameState.round} onGameEnd={handleGameEnd}></Game>
     </div>
   )
 }

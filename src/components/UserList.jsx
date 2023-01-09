@@ -45,6 +45,7 @@ function User({user, selected, onEditClick, onClick}) {
     <div className={className} onClick={onClick}>
       Name : {user.name}
       Age : {user.age}
+      Score : {user.score}
       <Gender value={user.gender}></Gender>
       <button onClick={handleEditClick}>Edit user</button>
     </div>

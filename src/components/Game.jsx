@@ -8,23 +8,25 @@ import AnswerHistory from './presentation/AnswerHistory'
 
 
 
-export default function Game({user, set, onGameEnd}) {
+export default function Game({user, round, onGameEnd}) {
 
   const [question, setQuestion] = useState({})
   const [answer, setAnswer] = useState({})
+  const [score, setScore] = useState(0)
   const [answersHistory, addAnswerToHistory] = useReducer((state, a) => state.concat(a), [])
 
   useEffect(() => {
-    if(!set){
+    if(!round){
       return
     }
     fetch('api/getQuestion')
       .then(res => res.json())
       .then(res => {
         setQuestion(res)
+        setScore(0)
         console.log('got new question', res)
       })
-  },[set])
+  },[round])
 
   useEffect(() => {
     console.log('fetch answer after 45s')
@@ -34,9 +36,9 @@ export default function Game({user, set, onGameEnd}) {
         .then(res => {
           setAnswer(res)
         })
-      //
-      onGameEnd()
-    }, 4500)
+      // TODO debug old state
+      onGameEnd(score)
+    }, 10000)
     return () => clearTimeout(timer)
   }, [question])
 
@@ -45,6 +47,9 @@ export default function Game({user, set, onGameEnd}) {
     postData('api/answer', { id : question.id, answer })
       .then((data) => {
         console.log(data)
+        if(data.score > score){
+          setScore(data.score)
+        }
         addAnswerToHistory({text: answer, score: data.score})
       });
   }
