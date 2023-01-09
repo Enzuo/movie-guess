@@ -4,7 +4,7 @@ import VideoFile from './VideoFile'
 import Prompt from './Prompt'
 import Poster from './Poster'
 import AnswerStatus from './AnswerStatus'
-import AnswerHistory from './presentation/AnswerHistory'
+import PromptHistory from './presentation/PromptHistory'
 import CountdownTimer from './CountDownTimer'
 
 
@@ -14,7 +14,7 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
   const [question, setQuestion] = useState({})
   const [answer, setAnswer] = useState({})
   const [score, setScore] = useState(0)
-  const [answersHistory, addAnswerToHistory] = useReducer((state, a) => state.concat(a), [])
+  const [promptsHistory, addPromptToHistory] = useReducer((state, a) => state.concat(a), [])
 
   useEffect(() => {
     if(!round){
@@ -55,7 +55,7 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
         if(data.score > score){
           setScore(data.score)
         }
-        addAnswerToHistory({text: answer, score: data.score})
+        addPromptToHistory({text: answer, score: data.score})
       });
   }
 
@@ -72,8 +72,8 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
         </div>
         <div className="answer">
           <Prompt onSubmit={handleSubmit}></Prompt>
-          <AnswerStatus answers={answersHistory}></AnswerStatus>
-          <AnswerHistory answers={answersHistory}></AnswerHistory>
+          <AnswerStatus answers={promptsHistory}></AnswerStatus>
+          <PromptHistory prompts={promptsHistory}></PromptHistory>
         </div>
         <TestNull></TestNull>
       </div>
