@@ -12,6 +12,7 @@ import CountdownTimer from './CountDownTimer'
 export default function Game({user, round, onGameEnd, timeEnd}) {
 
   const [question, setQuestion] = useState({})
+  const [isGameOver, setOver] = useState(false)
   // const [answer, setAnswer] = useState({})
   const [score, setScore] = useState(0)
   const [promptsHistory, addPromptToHistory] = useReducer((state, a) => state.concat(a), [])
@@ -25,6 +26,7 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
       .then(res => res.json())
       .then(res => {
         setQuestion(res)
+        setOver(false)
         setScore(0)
         console.log('got new question', res)
       })
@@ -38,15 +40,16 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
         .then(res => {
           addRoundToHistory(res)
         })
-      // TODO fix stale closure
-      gameEnd()
+      setOver(true)
     }, 10000)
     return () => clearTimeout(timer)
   }, [question])
 
-  function gameEnd(){
-    onGameEnd(score)
-  }
+  useEffect(() => {
+    if(isGameOver){
+      onGameEnd(score)
+    }
+  }, [isGameOver])
 
   function handleSubmit(answer){
     console.log(answer)
