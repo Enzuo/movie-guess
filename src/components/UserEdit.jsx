@@ -1,5 +1,6 @@
 import { useState } from "react"
-import { GENDERS } from "../logic/user"
+import { GENDERS, AVATARS } from "../logic/user"
+import AvatarPicker from "./presentation/AvatarPicker"
 
 export default function UserEdit ({user, onEdit}) {
   if(!user){
@@ -15,6 +16,7 @@ export default function UserEdit ({user, onEdit}) {
       Gender : <GenderPicker value={user.gender} onPick={(gender) => onEdit({...user, gender})}>
 
       </GenderPicker>
+      <AvatarPicker value={user.avatar} options={AVATARS} onPick={(avatar) => onEdit({...user, avatar})}></AvatarPicker>
     </div>
   )
 }

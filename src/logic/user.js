@@ -1,6 +1,29 @@
 let uniqueId = 0;
 
-export const GENDERS = [{ label : '♀️' }, {label: '♂️'}, {label: '⚧️'}]
+import { faGenderless, faMars, faVenus } from '@fortawesome/free-solid-svg-icons'
+import { faCameraRetro, faClapperboard, faWhiskeyGlass, faFilm } from '@fortawesome/free-solid-svg-icons'
+
+
+export const GENDERS = [{ 
+  label : 'male', 
+  icon : faMars,
+},{
+  label: 'female',
+  icon: faVenus,
+},{
+  label: 'other',
+  icon: faGenderless,
+}]
+
+export const AVATARS = [{
+  icon : faCameraRetro,
+}, {
+  icon : faClapperboard,
+}, {
+  icon : faWhiskeyGlass,
+}, {
+  icon : faFilm,
+}]
 
 export function createUser() {
   return {

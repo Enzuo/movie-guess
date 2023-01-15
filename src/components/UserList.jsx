@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { GENDERS } from "../logic/user"
+import Gender from './presentation/Gender'
 
 export default function UserList ({users, onAddClick, onEditClick, onSelect}) {
 
@@ -48,15 +49,9 @@ function User({user, selected, onEditClick, onClick}) {
       Name : {user.name}
       Age : {user.age}
       Score : {user.score}
-      <Gender value={user.gender}></Gender>
+      <Gender options={GENDERS} index={user.gender}></Gender>
       <button onClick={handleEditClick}>Edit user</button>
     </div>
   )
 }
 
-function Gender({value}) {
-  if(value === null) return null
-  return (
-    <div>{GENDERS[value].label}</div>
-  )
-}
