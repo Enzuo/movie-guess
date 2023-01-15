@@ -17,7 +17,9 @@ export default function UserList ({users, onAddClick, onEditClick, onSelect}) {
     if(highlightedIndex === index){
       onSelect(users[index])
     }
-    setHiglighted(index)
+    else {
+      setHiglighted(index)
+    }
   }
 
 

@@ -10,6 +10,8 @@ import { useLocalStorage } from "../hooks/localStorage"
 function AppMain() {
 
   const [users, setUsers] = useLocalStorage('users', [createUser()])
+  // const [usersLS, setUsersLS] = useLocalStorage('users', [createUser()])
+  // const [users, setUsers] = useState(usersLS)
   const [editUser, setEditUser] = useState(null)
   const [gameState, setGameState] = useState({isStarted: false, round:0})
 
@@ -54,6 +56,11 @@ function AppMain() {
     setGameState(Object.assign(gameState, {isStarted: false}))
   }
 
+  function testScore(){
+    gameState.user.score  = gameState.user.score + 1
+    setUsers(saveUser(gameState.user, users))
+  }
+
   let userEdit = editUser !== null ? <UserEdit user={editUser} onEdit={handleUserSave}></UserEdit> : null
 
 
@@ -62,6 +69,7 @@ function AppMain() {
       <UserList users={users} onAddClick={handleUserAddClick} onEditClick={handleUserEditClick} onSelect={handleUserSelect}></UserList>
         {userEdit}
       <Game timeEnd={gameState.timeEnd} user={gameState.user} round={gameState.round} onGameEnd={handleGameEnd}></Game>
+      <button onClick={testScore}>Add score</button>
     </div>
   )
 }

@@ -11,10 +11,19 @@ export function createUser() {
   }
 }
 
+
+/**
+ * Update or Create user
+ * https://beta.reactjs.org/learn/updating-arrays-in-state
+ * @param {*} user 
+ * @param {*} users 
+ * @returns 
+ */
 export function saveUser(user, users){
   let indexUser = users.findIndex(u => u.id === user.id)
   if(indexUser >= 0){
-    users[indexUser] = user
+    return users.map((u) => u.id === user.id ? {...user} : u)
+    // users[indexUser] = {...user}
   }
   else {
     users.push(user)
