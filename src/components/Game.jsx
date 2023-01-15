@@ -14,6 +14,7 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
   const [question, setQuestion] = useState({})
   const [isGameOver, setOver] = useState(false)
   // const [answer, setAnswer] = useState({})
+  // const [clockTick, setClockTick] = useState(0)
   const [score, setScore] = useState(0)
   const [promptsHistory, addPromptToHistory] = useReducer((state, a) => state.concat(a), [])
   const [roundsHistory, addRoundToHistory] = useReducer((state, a) => state.concat(a), [])
@@ -33,16 +34,20 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
   },[round])
 
   useEffect(() => {
-    console.log('fetch answer after 45s')
-    const timer = setTimeout(() => {
-      fetch('api/getAnswer?id='+question.id)
-        .then(res => res.json())
-        .then(res => {
-          addRoundToHistory(res)
-        })
-      setOver(true)
-    }, 10000)
-    return () => clearTimeout(timer)
+    console.log('setup game clock')
+    const clock = setInterval(() => {
+      const currentTime = new Date().getTime()
+      if(currentTime >= timeEnd){
+        fetch('api/getAnswer?id='+question.id)
+          .then(res => res.json())
+          .then(res => {
+            addRoundToHistory(res)
+          })
+        setOver(true)
+        clearInterval(clock)
+      }
+    }, 1000)
+    return () => clearInterval(clock)
   }, [question])
 
   useEffect(() => {

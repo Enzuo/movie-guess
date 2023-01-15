@@ -8,7 +8,11 @@ export default function CountdownTimer({ targetTime }) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCountDown(targetTime - new Date().getTime());
+      const currentTime = new Date().getTime()
+      setCountDown(targetTime - currentTime);
+      if(targetTime - currentTime <= 0){
+        clearInterval(interval)
+      }
     }, 1000);
 
     return () => clearInterval(interval);
