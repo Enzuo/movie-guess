@@ -1,11 +1,13 @@
 import { useState, useEffect, useReducer} from 'react'
 
 import VideoFile from './VideoFile'
-import Prompt from './Prompt'
-import Poster from './Poster'
+import Prompt from './presentation/Prompt'
 import AnswerStatus from './AnswerStatus'
 import PromptHistory from './presentation/PromptHistory'
 import CountdownTimer from './CountDownTimer'
+import RoundHistory from './presentation/RoundHistory'
+
+import './Game.css'
 
 
 
@@ -73,18 +75,18 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
 
   if (question) {
     return (
-      <div>
+      <div className="layout">
         <div className="question">
+          <div>What&apos;s this movie ?</div>
           <VideoFile file={question.file}></VideoFile>
           <CountdownTimer targetTime={timeEnd}></CountdownTimer>
           <RoundHistory history={roundsHistory}></RoundHistory>
         </div>
-        <div className="answer">
+        <div className="prompt">
           <Prompt onSubmit={handleSubmit}></Prompt>
           <AnswerStatus answers={promptsHistory}></AnswerStatus>
           <PromptHistory history={promptsHistory}></PromptHistory>
         </div>
-        <TestNull></TestNull>
       </div>
     )
   }
@@ -95,28 +97,7 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
   )
 }
 
-function RoundHistory({history}){
-  return (
-    <div>
-      Answers
-      <ul>
-        { reverseMap( history, (d, index) => (<li key={index}><Answer d={d}></Answer></li>) )}
-      </ul>
-    </div>
-  )
-}
 
-function Answer({d}){
-  if(!d.title){
-    return null
-  }
-  return (
-    <div>
-      <Poster file={d.poster}></Poster>
-      <div>Title : {d.title}</div>
-    </div>
-  )
-}
 
 function TestNull(){
   let [myVal, setMyVal] = useState(2)
@@ -136,14 +117,7 @@ function TestNull(){
  * 
  */
 
-function reverseMap(array, cb){
-  let output = []
-  for(let i=array.length-1; i >= 0; i--){
-    let result = cb(array[i], i)
-    output.push(result)
-  }
-  return output
-}
+
 
 async function postData(url = '', data = {}) {
   // Default options are marked with *

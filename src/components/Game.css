@@ -1,0 +1,12 @@
+.layout {
+  display: flex;
+}
+
+.question {
+  /* width:400px; */
+  flex-grow: 1;
+}
+
+.prompt {
+  flex-grow: 1;
+}

@@ -1,4 +1,10 @@
 import { useState, useEffect } from 'react'
+import { css } from '@linaria/core'
+
+
+const prompt = css`
+  text-size:32px;
+`
 
 
 export default function Prompt({ onSubmit }) {
@@ -11,10 +17,12 @@ export default function Prompt({ onSubmit }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input {...answer}></input>
-      <input type="submit" value="Submit" />
-    </form>
+    <div className={prompt}>
+      <form onSubmit={handleSubmit}>
+        <input {...answer}></input>
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
   )
 }
 
