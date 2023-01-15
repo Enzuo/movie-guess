@@ -1,11 +1,7 @@
 import { useState, useEffect } from 'react'
-import { css } from '@linaria/core'
-
-
-const prompt = css`
-  text-size:32px;
-`
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import './Prompt.css'
 
 export default function Prompt({ onSubmit }) {
 
@@ -17,10 +13,12 @@ export default function Prompt({ onSubmit }) {
   }
 
   return (
-    <div className={prompt}>
+    <div className="prompt">
       <form onSubmit={handleSubmit}>
         <input {...answer}></input>
-        <input type="submit" value="Submit" />
+        <button type='submit'>
+          <FontAwesomeIcon icon={faArrowRight} />
+        </button>
       </form>
     </div>
   )
