@@ -24,7 +24,6 @@ export function Picker ({ options, value, onPick, itemComponent }) {
         {options.map((a, i) => 
           itemComponent({
             id:i,
-            key:i,
             onSelect:() => handleSelect(i),
             isSelected:value === i,
             ...a,
@@ -34,11 +33,11 @@ export function Picker ({ options, value, onPick, itemComponent }) {
   )
 }
 
-function GenderChoice ({id, icon, label, onSelect, isSelected, key}) {
+function GenderChoice ({id, icon, label, onSelect, isSelected}) {
   const style = isSelected ? {color : 'orange'} : {}
 
   return (
-    <div key={key}>
+    <div key={id} className="picker-choice">
       <label htmlFor={"gender-" + id}>
         <input type="radio" className="choice-radio" checked={isSelected} name="gender-choice" id={"gender-" + id} value={id} onChange={() => onSelect(id)} />
         <div className="gender-choice" style={style} onClick={onSelect}>
@@ -51,11 +50,11 @@ function GenderChoice ({id, icon, label, onSelect, isSelected, key}) {
 }
 
 
-function AvatarChoice ({icon, isSelected, onSelect}) {
+function AvatarChoice ({id, icon, isSelected, onSelect}) {
   const style = isSelected ? {color : 'orange'} : {}
 
   return (
-    <div className="avatar-choice" onClick={onSelect}>
+    <div className="picker-choice" onClick={onSelect}>
       <FontAwesomeIcon style={style} icon={icon}></FontAwesomeIcon>
     </div>
   )

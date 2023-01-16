@@ -1,17 +1,16 @@
-.avatar-choice {
+.picker-choice {
   display:inline-block;
   padding:10px;
   border-radius:20px;
-  width:20px;
-  height:20px;
+  line-height: 10px;
   font-size:20px;
   cursor:pointer;
 }
 
-.avatar-choice svg{
+.picker-choice svg{
   vertical-align: 0;
 }
 
-.avatar-choice:hover{
+.picker-choice:hover{
   background:#eee;
 }
