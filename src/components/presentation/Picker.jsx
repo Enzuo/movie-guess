@@ -1,18 +1,20 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import './AvatarPicker.css'
+import { useId } from 'react'
+import './Picker.css'
 
 
 
 
 export function AvatarPicker (props) {
-  return (<Picker {...props} itemComponent={AvatarChoice}></Picker>)
+  return (<Picker {...props} itemComponent={PickerChoice}></Picker>)
 }
 
-export const GenderPicker = (props) => (<Picker {...props} itemComponent={GenderChoice}></Picker>)
+export const GenderPicker = (props) => (<Picker {...props} itemComponent={PickerChoice}></Picker>)
 
 
 
 export function Picker ({ options, value, onPick, itemComponent }) {
+  const htmlId = useId()
 
   function handleSelect(index){
     onPick(index)
@@ -23,9 +25,10 @@ export function Picker ({ options, value, onPick, itemComponent }) {
       <div>
         {options.map((a, i) => 
           itemComponent({
-            id:i,
-            onSelect:() => handleSelect(i),
-            isSelected:value === i,
+            id: i,
+            pickerId: htmlId,
+            onSelect: () => handleSelect(i),
+            isSelected: value === i,
             ...a,
         }))}
       </div>
@@ -33,15 +36,17 @@ export function Picker ({ options, value, onPick, itemComponent }) {
   )
 }
 
-function GenderChoice ({id, icon, label, onSelect, isSelected}) {
+function PickerChoice ({id, pickerId, icon, label, onSelect, isSelected}) {
+  const htmlid = useId()
+
   const style = isSelected ? {color : 'orange'} : {}
 
   return (
     <div key={id} className="picker-choice">
-      <label htmlFor={"gender-" + id}>
-        <input type="radio" className="choice-radio" checked={isSelected} name="gender-choice" id={"gender-" + id} value={id} onChange={() => onSelect(id)} />
-        <div className="gender-choice" style={style} onClick={onSelect}>
-          <FontAwesomeIcon style={style} icon={icon}></FontAwesomeIcon>
+      <label htmlFor={htmlid}>
+        <input type="radio" className="picker-choice-radio" checked={isSelected} name={pickerId} id={htmlid} value={id} onChange={() => onSelect(id)} />
+        <div className="picker-choice-item" onClick={onSelect}>
+          <FontAwesomeIcon icon={icon}></FontAwesomeIcon>
           {label}
         </div>
       </label>

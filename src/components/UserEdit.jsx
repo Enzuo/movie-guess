@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { GENDERS, AVATARS } from "../logic/user"
-import {GenderPicker, AvatarPicker} from "./presentation/AvatarPicker"
+import {GenderPicker, AvatarPicker} from "./presentation/Picker"
 
 export default function UserEdit ({user, onEdit}) {
   if(!user){

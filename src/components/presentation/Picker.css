@@ -1,0 +1,45 @@
+.picker-choice {
+  display:inline-block;
+}
+.picker-choice-item {
+  padding:10px;
+  border-radius:20px;
+  line-height: 10px;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.picker-choice svg{
+  vertical-align: 0;
+}
+
+.picker-choice label {
+  cursor: pointer;
+}
+
+.picker-choice-item:hover{
+  background:#eee;
+}
+
+input[class="picker-choice-radio"]:checked + div {
+  color:orange;
+}
+
+input[class="picker-choice-radio"]:focus + div {
+  background:#eee;
+}
+
+
+input[class="picker-choice-radio"] {
+  position: absolute;
+  left: -9999px;
+  opacity:0;
+}
+
+/* .gender-choice {
+  font-family: monospace;
+  font-size: 25px;
+  display:inline;
+  margin:12px;
+  cursor:pointer;
+} */
