@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer} from 'react'
+import { useState, useEffect, useReducer, useRef} from 'react'
 
 import VideoFile from './VideoFile'
 import Prompt from './presentation/Prompt'
@@ -15,6 +15,7 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
 
   const [question, setQuestion] = useState({})
   const [isGameOver, setOver] = useState(false)
+  const promptRef = useRef(null)
   // const [answer, setAnswer] = useState({})
   // const [clockTick, setClockTick] = useState(0)
   const [score, setScore] = useState(0)
@@ -33,6 +34,7 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
         setScore(0)
         console.log('got new question', res)
       })
+    promptRef.current.focus()
   },[round])
 
   useEffect(() => {
@@ -83,7 +85,7 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
           <RoundHistory history={roundsHistory}></RoundHistory>
         </div>
         <div className="prompt">
-          <Prompt onSubmit={handleSubmit}></Prompt>
+          <Prompt onSubmit={handleSubmit} ref={promptRef}></Prompt>
           <AnswerStatus answers={promptsHistory}></AnswerStatus>
           <PromptHistory history={promptsHistory}></PromptHistory>
         </div>
