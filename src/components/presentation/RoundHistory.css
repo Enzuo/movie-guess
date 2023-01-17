@@ -1,0 +1,14 @@
+.game-history {
+  background: #f5f5f5;
+}
+
+.game-round {
+  display: flex;
+  background: #fff;
+  margin:5px;
+}
+
+.movie-title {
+  font-size:15px;
+  padding:2px 10px;
+}

@@ -4,7 +4,7 @@ import './RoundHistory.css'
 
 export default function RoundHistory({history}){
   return (
-    <div>
+    <div className="game-history">
       Answers
       <ul>
         { reverseMap( history, (d, index) => (<li key={index}><RoundResult d={d}></RoundResult></li>) )}
@@ -18,9 +18,9 @@ function RoundResult({d}){
     return null
   }
   return (
-    <div className="round">
+    <div className="game-round">
       <Poster file={d.poster}></Poster>
-      <div>Title : {d.title}</div>
+      <div className="movie-title">{d.title}</div>
     </div>
   )
 }
