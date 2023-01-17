@@ -1,12 +1,16 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useReducer } from "react"
 
 export default function CountdownTimer({ targetTime }) {
 
-  const [countDown, setCountDown] = useState(
-    targetTime - new Date().getTime()
-  );
+  const [countDown, setCountDown] = useReducer((state, action) => {
+    const currentTime = new Date().getTime()
+    const time = targetTime - currentTime
+    return time > 0 ? time : 0
+  },
+  targetTime - new Date().getTime())
 
   useEffect(() => {
+    setCountDown(targetTime - new Date().getTime())
     const interval = setInterval(() => {
       const currentTime = new Date().getTime()
       setCountDown(targetTime - currentTime);
@@ -21,10 +25,62 @@ export default function CountdownTimer({ targetTime }) {
 
   const seconds = Math.floor((countDown % (1000 * 60)) / 1000);
 
+  const percent = seconds/12
+  const radius = 360*percent
+  const color = seconds > 5 ? "#333" : "#d33"
 
   return (
     <div>
       {seconds}
+      <svg className="countdown-svg" style={{width: '28px', height:'28px'}}>
+        <path
+            fill="none"
+            stroke="#ddd"
+            strokeWidth="4"
+            d={describeArc(14, 14, 12, 0, 359)}
+        />
+        <path
+            fill="none"
+            stroke={color}
+            strokeWidth="4"
+            d={describeArc(14, 14, 12, 0, radius)}
+        />
+      </svg>
     </div>
   )
+}
+
+
+
+
+function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+  var angleInRadians = ((angleInDegrees - 90) * Math.PI) / 180.0;
+
+  return {
+      x: centerX + radius * Math.cos(angleInRadians),
+      y: centerY + radius * Math.sin(angleInRadians)
+  };
+}
+
+function describeArc(x, y, radius, startAngle, endAngle) {
+  var start = polarToCartesian(x, y, radius, endAngle);
+  var end = polarToCartesian(x, y, radius, startAngle);
+
+  var largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
+
+  var d = [
+      'M',
+      start.x,
+      start.y,
+      'A',
+      radius,
+      radius,
+      0,
+      largeArcFlag,
+      0,
+      end.x,
+      end.y
+  ].join(' ');
+
+  return d;
 }
