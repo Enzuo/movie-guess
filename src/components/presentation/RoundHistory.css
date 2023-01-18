@@ -1,11 +1,11 @@
 .game-history {
-  background: #f5f5f5;
 }
 
 .game-round {
   display: flex;
-  background: #fff;
+  background: #2F3B4A;
   margin:5px;
+  color:#fff;
 }
 
 .movie-title {

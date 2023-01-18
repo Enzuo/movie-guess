@@ -29,12 +29,20 @@ function Avatar({options, index}){
   )
 }
 
-export function UserButton({user, index, isSelected, onClick, onEditClick, avatars}) {
+export function UserButton({user, index, isSelected, onSelect, onEditClick, avatars}) {
   return (
     <div className="user-button">
       <label htmlFor={"user"+index}>
-        <input id={"user"+index} type="radio" name="user" className="user-button-radio"/>
-        <User avatars={avatars} isSelected={isSelected} onClick={onClick} onEditClick={onEditClick} user={user}></User>
+        <input
+          id={"user"+index} 
+          type="radio" 
+          name="user" 
+          className="user-button-radio" 
+          checked={isSelected} 
+          onChange={(e) => onSelect(e.currentTarget.value)}
+          onClick={(e) => onSelect(e.currentTarget.value)}
+        />
+        <User avatars={avatars} onEditClick={onEditClick} user={user}></User>
       </label>
     </div>
   )

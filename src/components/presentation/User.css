@@ -5,16 +5,21 @@
 .user-button {
 }
 
+.user {
+  cursor:pointer;
+  opacity: 0.5;
+}
+
 input[class="user-button-radio"]:checked + div {
-  color:white;
+  opacity: 1;
 }
 
 input[class="user-button-radio"]:focus + div {
-  background:#eee;
+  background:#2F3B4A;
 }
 
 .user:hover {
-  background:#eee;
+  background:#2F3B4A;
 }
 
 .user button{

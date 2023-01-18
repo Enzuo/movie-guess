@@ -6,7 +6,7 @@ import {UserButton} from "./presentation/User"
 
 export default function UserList ({users, onAddClick, onEditClick, onSelect}) {
 
-  const [highlightedIndex, setHiglighted] = useState(null)
+  const [selectedId, setSelected] = useState(null)
 
   function handleAdd(){
     onAddClick()
@@ -16,22 +16,29 @@ export default function UserList ({users, onAddClick, onEditClick, onSelect}) {
     onEditClick(index)
   }
 
-  function handleClick(index){
-    if(highlightedIndex === index){
+  function handleSelect(index){
+    if(selectedId === index){
       onSelect(users[index])
     }
     else {
-      setHiglighted(index)
+      setSelected(index)
     }
+  }
+
+  function handleSubmit(e){
+    e.preventDefault()
+    handleSelect(selectedId)
   }
 
 
 
   return (
-    <div className="user-list">
-      {users.map((u, i) => <UserButton key={i} user={u} index={i} isSelected={highlightedIndex === i} onClick={() => handleClick(i)} onEditClick={() => handleEdit(i)} avatars={AVATARS}/>)}
-      <button onClick={handleAdd}>Add user</button>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <div className="user-list">
+        {users.map((u, i) => <UserButton key={i} user={u} index={i} isSelected={selectedId === i} onSelect={() => handleSelect(i)} onEditClick={() => handleEdit(i)} avatars={AVATARS}/>)}
+          <button onClick={handleAdd}>Add user</button>
+      </div>
+    </form>
   )
 }
 
