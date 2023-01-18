@@ -17,10 +17,11 @@ function AppMain() {
   const userEditRef = useRef()
 
   useEffect(() => {
+    console.log("use effect relaunch on editUser", editUser)
     if(editUser){
       userEditRef.current.focus()
     }
-  }, [editUser])
+  }, [editUser.id])
 
   function handleUserAddClick(){
     setUsers((state) => state.concat(createUser()))
