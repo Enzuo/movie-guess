@@ -7,6 +7,7 @@ export default function User({user, isSelected, avatars, onEditClick, onClick}) 
 
   function handleEditClick(e) {
     e.stopPropagation()
+    e.preventDefault()
     onEditClick()
   }
 

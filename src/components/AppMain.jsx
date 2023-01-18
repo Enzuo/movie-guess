@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef, useEffect} from "react"
 
 import {createUser, saveUser} from '../logic/user'
 import UserList from "./UserList"
@@ -14,6 +14,13 @@ function AppMain() {
   // const [users, setUsers] = useState(usersLS)
   const [editUser, setEditUser] = useState(null)
   const [gameState, setGameState] = useState({isStarted: false, round:0})
+  const userEditRef = useRef()
+
+  useEffect(() => {
+    if(editUser){
+      userEditRef.current.focus()
+    }
+  }, [editUser])
 
   function handleUserAddClick(){
     setUsers((state) => state.concat(createUser()))
@@ -61,7 +68,7 @@ function AppMain() {
     setUsers(saveUser(gameState.user, users))
   }
 
-  let userEdit = editUser !== null ? <UserEdit user={editUser} onEdit={handleUserSave}></UserEdit> : null
+  let userEdit = editUser !== null ? <UserEdit ref={userEditRef} user={editUser} onEdit={handleUserSave}></UserEdit> : null
 
 
   return (
