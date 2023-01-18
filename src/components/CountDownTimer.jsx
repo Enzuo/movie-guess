@@ -4,6 +4,7 @@ export default function CountdownTimer({ targetTime }) {
 
   const [countDownLength, setCountDownLength] = useState(10)
 
+  // TODO Fix unpure reducer
   const [countDown, updateCountDown] = useReducer((state, action) => {
     const currentTime = new Date().getTime()
     const time = targetTime - currentTime

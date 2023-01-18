@@ -1,0 +1,26 @@
+.user-avatar{
+  font-size:25px;
+}
+
+.user-button {
+}
+
+input[class="user-button-radio"]:checked + div {
+  color:white;
+}
+
+input[class="user-button-radio"]:focus + div {
+  background:#eee;
+}
+
+.user:hover {
+  background:#eee;
+}
+
+.user button{
+  font-size: 9px;
+}
+
+.user.selected{
+  border-color: #f00;
+}

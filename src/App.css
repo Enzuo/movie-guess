@@ -41,21 +41,9 @@ button {
   font-size: calc(10px + 2vmin);
 }
 
-
-
-
-
-
-.user {
-  border:1px solid;
-  width:100px;
-  float:right;
+.user-list {
+  display:flex;
 }
 
-.user button{
-  font-size: 9px;
-}
 
-.user.selected{
-  border-color: #f00;
-}
+

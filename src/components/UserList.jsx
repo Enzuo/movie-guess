@@ -1,6 +1,8 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
-import { GENDERS } from "../logic/user"
+import { AVATARS, GENDERS } from "../logic/user"
 import Gender from './presentation/Gender'
+import {UserButton} from "./presentation/User"
 
 export default function UserList ({users, onAddClick, onEditClick, onSelect}) {
 
@@ -26,31 +28,9 @@ export default function UserList ({users, onAddClick, onEditClick, onSelect}) {
 
 
   return (
-    <div>
-      {users.map((u, i) => <User selected={highlightedIndex === i} onClick={() => handleClick(i)} onEditClick={() => handleEdit(i)} key={i} user={u}></User>)}
+    <div className="user-list">
+      {users.map((u, i) => <UserButton key={i} user={u} index={i} isSelected={highlightedIndex === i} onClick={() => handleClick(i)} onEditClick={() => handleEdit(i)} avatars={AVATARS}/>)}
       <button onClick={handleAdd}>Add user</button>
-    </div>
-  )
-
-
-
-}
-
-function User({user, selected, onEditClick, onClick}) {
-  let className = selected ? "user selected" : "user"
-
-  function handleEditClick(e) {
-    e.stopPropagation()
-    onEditClick()
-  }
-
-  return (
-    <div className={className} onClick={onClick}>
-      Name : {user.name}
-      Age : {user.age}
-      Score : {user.score}
-      <Gender options={GENDERS} index={user.gender}></Gender>
-      <button onClick={handleEditClick}>Edit user</button>
     </div>
   )
 }
