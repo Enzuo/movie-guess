@@ -2,7 +2,9 @@ import { useState, useEffect, useReducer } from "react"
 
 export default function CountdownTimer({ targetTime }) {
 
-  const [countDown, setCountDown] = useReducer((state, action) => {
+  const [countDownLength, setCountDownLength] = useState(10)
+
+  const [countDown, updateCountDown] = useReducer((state, action) => {
     const currentTime = new Date().getTime()
     const time = targetTime - currentTime
     return time > 0 ? time : 0
@@ -10,10 +12,11 @@ export default function CountdownTimer({ targetTime }) {
   targetTime - new Date().getTime())
 
   useEffect(() => {
-    setCountDown(targetTime - new Date().getTime())
+    setCountDownLength(targetTime - new Date().getTime())
+    updateCountDown()
     const interval = setInterval(() => {
+      updateCountDown();
       const currentTime = new Date().getTime()
-      setCountDown(targetTime - currentTime);
       if(targetTime - currentTime <= 0){
         clearInterval(interval)
       }
@@ -25,9 +28,9 @@ export default function CountdownTimer({ targetTime }) {
 
   const seconds = Math.floor((countDown % (1000 * 60)) / 1000);
 
-  const percent = seconds/12
+  const percent = countDown/countDownLength
   const radius = 360*percent
-  const color = seconds > 5 ? "#333" : "#d33"
+  const color = seconds > 5 ? "#aaa" : "#d33"
 
   return (
     <div>
@@ -36,7 +39,7 @@ export default function CountdownTimer({ targetTime }) {
         <path
             fill="none"
             stroke="#ddd"
-            strokeWidth="4"
+            strokeWidth="2"
             d={describeArc(14, 14, 12, 0, 359)}
         />
         <path
