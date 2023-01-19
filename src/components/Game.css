@@ -1,5 +1,19 @@
-.layout {
+.game-layout {
   display: flex;
+}
+
+.game-history {
+  flex: 1;
+}
+
+.game-theater {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.prompt-history {
+  flex: 1;
 }
 
 .question {

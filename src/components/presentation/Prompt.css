@@ -1,3 +1,15 @@
+.prompt form {
+  display:flex;
+}
+
 .prompt input {
   font-size:26px;
+  border: 2px solid #008BFF;
+}
+
+.prompt button {
+  background: #008BFF;
+  border: none;
+  cursor: pointer;
+  color: white;
 }

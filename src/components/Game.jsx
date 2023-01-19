@@ -1,6 +1,6 @@
 import { useState, useEffect, useReducer, useRef} from 'react'
 
-import VideoFile from './VideoFile'
+import VideoFile from './assets/VideoFile'
 import Prompt from './presentation/Prompt'
 import AnswerStatus from './AnswerStatus'
 import PromptHistory from './presentation/PromptHistory'
@@ -72,21 +72,30 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
       });
   }
 
+  const theaterStyle = {
+    height: 240,
+    width: 240 * 2.33,
+    background: "black",
+  }
 
 
 
   if (question) {
     return (
-      <div className="layout">
-        <div className="question">
-          <div>What&apos;s this movie ?</div>
-          <VideoFile file={question.file}></VideoFile>
-          <CountdownTimer targetTime={timeEnd}></CountdownTimer>
+      <div className="game-layout">
+        <div className="game-history">
           <RoundHistory history={roundsHistory}></RoundHistory>
         </div>
-        <div className="prompt">
+        <div className="game-theater">
+          <div>What&apos;s this movie ?</div>
+          <div className="theater" style={theaterStyle}>
+            <VideoFile file={question.file}></VideoFile>
+          </div>
+          <CountdownTimer targetTime={timeEnd}></CountdownTimer>
           <Prompt onSubmit={handleSubmit} ref={promptRef}></Prompt>
           <AnswerStatus answers={promptsHistory}></AnswerStatus>
+        </div>
+        <div className="prompt-history">
           <PromptHistory history={promptsHistory}></PromptHistory>
         </div>
       </div>
