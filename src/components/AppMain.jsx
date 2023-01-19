@@ -5,6 +5,7 @@ import UserList from "./UserList"
 import UserEdit from "./UserEdit"
 import Game from "./Game"
 import { useLocalStorage } from "../hooks/localStorage"
+import Modal from "./presentation/Modal"
 
 
 function AppMain() {
@@ -12,13 +13,13 @@ function AppMain() {
   const [users, setUsers] = useLocalStorage('users', [createUser()])
   // const [usersLS, setUsersLS] = useLocalStorage('users', [createUser()])
   // const [users, setUsers] = useState(usersLS)
-  const [editUser, setEditUser] = useState(null)
+  const [editUser, setEditUser] = useState({})
   const [gameState, setGameState] = useState({isStarted: false, round:0})
   const userEditRef = useRef()
 
   useEffect(() => {
     console.log("use effect relaunch on editUser", editUser)
-    if(editUser){
+    if(editUser.id){
       userEditRef.current.focus()
     }
   }, [editUser.id])
@@ -69,16 +70,19 @@ function AppMain() {
     setUsers(saveUser(gameState.user, users))
   }
 
-  let userEdit = editUser !== null ? <UserEdit ref={userEditRef} user={editUser} onEdit={handleUserSave}></UserEdit> : null
-
+  let userEdit = editUser.id ? (
+    <Modal onExit={() => {setEditUser({})}}>
+      <UserEdit ref={userEditRef} user={editUser} onEdit={handleUserSave}></UserEdit>
+    </Modal>) 
+  : null
 
   return (
-    <div>
+    <>
+      {userEdit}
       <UserList users={users} onAddClick={handleUserAddClick} onEditClick={handleUserEditClick} onSelect={handleUserSelect}></UserList>
-        {userEdit}
       <Game timeEnd={gameState.timeEnd} user={gameState.user} round={gameState.round} onGameEnd={handleGameEnd}></Game>
       <button onClick={testScore}>Add score</button>
-    </div>
+    </>
   )
 }
 

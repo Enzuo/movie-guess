@@ -26,6 +26,7 @@ export default function UserList ({users, onAddClick, onEditClick, onSelect}) {
   }
 
   function handleSubmit(e){
+    console.log('handleSubmit')
     e.preventDefault()
     handleSelect(selectedId)
   }
@@ -36,8 +37,9 @@ export default function UserList ({users, onAddClick, onEditClick, onSelect}) {
     <form onSubmit={handleSubmit}>
       <div className="user-list">
         {users.map((u, i) => <UserButton key={i} user={u} index={i} isSelected={selectedId === i} onSelect={() => handleSelect(i)} onEditClick={() => handleEdit(i)} avatars={AVATARS}/>)}
-          <button onClick={handleAdd}>Add user</button>
+          <button type="button" onClick={handleAdd}>Add user</button>
       </div>
+      <input type="submit"/>
     </form>
   )
 }

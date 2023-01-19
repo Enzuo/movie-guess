@@ -6,6 +6,7 @@ export default function User({user, isSelected, avatars, onEditClick, onClick}) 
   let className = isSelected ? "user selected" : "user"
 
   function handleEditClick(e) {
+    console.log('edit click')
     e.stopPropagation()
     e.preventDefault()
     onEditClick()
@@ -18,13 +19,14 @@ export default function User({user, isSelected, avatars, onEditClick, onClick}) 
       </div>
       <div className="user-name">{user.name}</div>
       <div className="user-score">{user.score}</div>
-      <button className="user-edit-button" onClick={handleEditClick}><FontAwesomeIcon icon={faPencil}/></button>
+      <button type="button" className="user-edit-button" onClick={handleEditClick}><FontAwesomeIcon icon={faPencil}/></button>
     </div>
   )
 }
 
 
 function Avatar({options, index}){
+  if(!index) return null
   return (
     <FontAwesomeIcon icon={options[index].icon}></FontAwesomeIcon>
   )
