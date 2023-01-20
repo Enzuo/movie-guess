@@ -2,7 +2,7 @@ import { useState, useEffect, useReducer, useRef} from 'react'
 
 import VideoFile from './assets/VideoFile'
 import Prompt from './presentation/Prompt'
-import AnswerStatus from './AnswerStatus'
+import AnswerStatus from './presentation/AnswerStatus'
 import PromptHistory from './presentation/PromptHistory'
 import CountdownTimer from './CountDownTimer'
 import RoundHistory from './presentation/RoundHistory'
@@ -93,7 +93,7 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
           </div>
           <CountdownTimer targetTime={timeEnd}></CountdownTimer>
           <Prompt onSubmit={handleSubmit} ref={promptRef}></Prompt>
-          <AnswerStatus answers={promptsHistory}></AnswerStatus>
+          <AnswerStatus answer={promptsHistory[promptsHistory.length-1]}></AnswerStatus>
         </div>
         <div className="prompt-history">
           <PromptHistory history={promptsHistory}></PromptHistory>

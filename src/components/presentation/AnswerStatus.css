@@ -1,0 +1,41 @@
+.status-container {
+  height:100px;
+  padding:10px;
+  padding-top:15px;
+}
+
+.status-message {
+  padding:7px;
+  border-radius: 10px;
+  font-weight: 700;
+  background-color: rgb(227, 64, 64);
+  min-width:50px;
+  position: relative;
+}
+
+.status-message:after {
+  content: '';
+  position: absolute;
+  border: 1px solid rgba(51, 51, 51, 0.19);
+  border-color: rgb(227, 64, 64) transparent;
+  border-width: 0 7px 6px 7px;
+  top: -6px;
+  left: 45%;
+}
+
+
+
+.status-message.message-almost {
+  background-color: #2eabe1;
+}
+.status-message.message-almost:after {
+  border-color: #2eabe1 transparent;
+}
+
+.status-message.message-success {
+  background-color: #2EE1A9;
+}
+.status-message.message-success:after {
+  border-color: #2EE1A9 transparent;
+}
+

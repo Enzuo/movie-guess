@@ -4,17 +4,17 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import './Prompt.css'
 
 export default forwardRef(function Prompt({ onSubmit }, ref) {
-  const answer = useFormInput('')
+  const promptInput = useFormInput('')
 
   function handleSubmit(event) {
     event.preventDefault()
-    onSubmit(answer.value)
+    onSubmit(promptInput.value)
   }
 
   return (
     <div className="prompt">
       <form onSubmit={handleSubmit}>
-        <input {...answer} ref={ref}></input>
+        <input type="text" {...promptInput} ref={ref}></input>
         <button type='submit'>
           <FontAwesomeIcon icon={faArrowRight} />
         </button>
