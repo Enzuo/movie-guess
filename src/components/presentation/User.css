@@ -1,5 +1,9 @@
 .user-avatar{
   font-size:25px;
+  width:25px;
+  height:25px;
+  margin: 0 auto;
+  margin-bottom: 5px;
 }
 
 .user-button {
@@ -8,14 +12,40 @@
 .user {
   cursor:pointer;
   opacity: 0.5;
+  width:70px;
+  overflow:hidden;
+  padding:10px;
+  position:relative;
+}
+
+.user button {
+  position:absolute;
+  right:15px;
+  top:5px;
+  background:none;
+  border:none;
+  color:rgb(88 165 232);
+  cursor:pointer;
+}
+
+.user button:focus, .user button:hover {
+  color:#a7d7ff;
+  /* border:1px solid #a7d7ff; */
 }
 
 input[class="user-button-radio"]:checked + div {
   opacity: 1;
+  background: #1363a5;
 }
 
 input[class="user-button-radio"]:focus + div {
   background:#2F3B4A;
+}
+
+input[type="radio"], input[type="submit"] {
+  position: absolute;
+  left: -9999px;
+  opacity:0;
 }
 
 .user:hover {

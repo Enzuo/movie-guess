@@ -57,7 +57,17 @@ button {
 
 .user-list {
   display:flex;
+  justify-content: flex-end;
 }
 
+.add-user {
+  background: #273748;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
 
+.add-user:hover, .add-user:focus {
+  background: #32475f;
+}
 

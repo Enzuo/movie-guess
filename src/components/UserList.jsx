@@ -37,7 +37,7 @@ export default function UserList ({users, onAddClick, onEditClick, onSelect}) {
     <form onSubmit={handleSubmit}>
       <div className="user-list">
         {users.map((u, i) => <UserButton key={i} user={u} index={i} isSelected={selectedId === i} onSelect={() => handleSelect(i)} onEditClick={() => handleEdit(i)} avatars={AVATARS}/>)}
-          <button type="button" onClick={handleAdd}>Add user</button>
+          <button type="button" className="add-user" onClick={handleAdd}>+</button>
       </div>
       <input type="submit"/>
     </form>
