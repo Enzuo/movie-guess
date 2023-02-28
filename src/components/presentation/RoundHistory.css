@@ -3,9 +3,12 @@
 
 .game-round {
   display: flex;
-  background: #2F3B4A;
-  margin:5px;
-  color:#fff;
+  background: #20272e;
+  margin: 10px;
+  color: #5f7185;
+  text-align: left;
+  padding: 2px;
+  box-shadow: 1px 1px 0px 1px #15171a;
 }
 
 .movie-title {
