@@ -4,13 +4,27 @@
 }
 
 .prompt input {
+  outline: none;
+  text-align:left;
   font-size:26px;
-  border: 2px solid #008BFF;
+  border: 2px solid #325775;
+  background: #141719;
+  color: white;
 }
 
+
+
 .prompt button {
-  background: #008BFF;
+  background: #325775;
   border: none;
   cursor: pointer;
   color: white;
+}
+
+.prompt input:focus {
+  border: 2px solid #3a74a3;
+}
+
+.prompt input:focus + button {
+  background: #3a74a3;
 }
