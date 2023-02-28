@@ -1,11 +1,11 @@
 import Poster from '../assets/Poster'
+import { reverseMap } from '../../logic/utils'
 import './RoundHistory.css'
 
 
 export default function RoundHistory({history}){
   return (
     <div className="game-history">
-      Answers
       <ul>
         { reverseMap( history, (d, index) => (<li key={index}><RoundResult d={d}></RoundResult></li>) )}
       </ul>
@@ -26,11 +26,3 @@ function RoundResult({d}){
   )
 }
 
-function reverseMap(array, cb){
-  let output = []
-  for(let i=array.length-1; i >= 0; i--){
-    let result = cb(array[i], i)
-    output.push(result)
-  }
-  return output
-}

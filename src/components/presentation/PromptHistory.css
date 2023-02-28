@@ -1,0 +1,36 @@
+.prompt-history {
+  position: relative;
+  display: flex;
+  align-content: flex-end;
+  height: 400px;
+  overflow: hidden;
+
+  color: #5f7185;
+  text-align: left;
+  padding:0 10px;
+}
+
+.prompt-history ul {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.prompt-history ul li{
+  margin: 7px 0;
+  animation: 0.7s appearing-history;
+}
+
+@keyframes appearing-history {
+  from {color: white;}
+  to {color: #5f7185;}
+}
+
+.prompt-history-background {
+  position: absolute;
+  top:0;
+  z-index:10;
+  height:300px;
+  width:100%;
+  background: linear-gradient(0deg, rgba(0,212,255,0) 0%, #181f27 100%);
+  pointer-events: none;
+}

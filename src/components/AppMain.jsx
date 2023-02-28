@@ -48,6 +48,7 @@ function AppMain() {
   }
 
   function handleUserDelete(user){
+    console.log('user got deleted', user)
     setCurrentDeleteUser({})
     setUsers(removeUser(user, users))
   }
@@ -93,7 +94,7 @@ function AppMain() {
     <Modal onExit={() => {setCurrentDeleteUser({})}}>
       <div>
         Delete user {currentDeleteUser.name} ? 
-        <button onClick={handleUserDelete(currentDeleteUser)}>Delete</button>
+        <button onClick={() => handleUserDelete(currentDeleteUser)}>Delete</button>
       </div>
     </Modal>) 
   : null

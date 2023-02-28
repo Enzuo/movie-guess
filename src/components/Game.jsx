@@ -83,7 +83,7 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
   if (question) {
     return (
       <div className="game-layout">
-        <div className="game-history">
+        <div className="game-history-col">
           <RoundHistory history={roundsHistory}></RoundHistory>
         </div>
         <div className="game-theater">
@@ -95,7 +95,7 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
           <Prompt onSubmit={handleSubmit} ref={promptRef} disabled={!isGameRunning}></Prompt>
           <AnswerStatus answer={promptsHistory[promptsHistory.length-1]}></AnswerStatus>
         </div>
-        <div className="prompt-history">
+        <div className="prompt-history-col">
           <PromptHistory history={promptsHistory}></PromptHistory>
         </div>
       </div>

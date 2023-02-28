@@ -4,8 +4,9 @@
 
 .game-title {
   margin: 20px;
-  color: #627b97;
+  color: #728ea5;
   font-weight: 900;
+  font-size: 22px;
 }
 
 .game-theater {
@@ -14,7 +15,7 @@
   flex-direction: column;
 }
 
-.prompt-history {
+.game-history-col, .prompt-history-col {
   flex: 1;
 }
 

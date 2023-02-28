@@ -9,6 +9,7 @@ export default forwardRef(function Prompt({ onSubmit, disabled}, ref) {
   function handleSubmit(event) {
     event.preventDefault()
     onSubmit(promptInput.value)
+    promptInput.setValue('')
   }
 
   return (
@@ -30,5 +31,5 @@ function useFormInput(defaultValue) {
     setValue(e.target.value)
   }
 
-  return { value, onChange: handleChange }
+  return { value, onChange: handleChange, setValue }
 }

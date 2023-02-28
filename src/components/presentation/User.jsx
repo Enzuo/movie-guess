@@ -33,7 +33,7 @@ export default function User({user, isSelected, avatars, onEditClick, onClick, o
 
 
 function Avatar({options, index}){
-  if(!index) return null
+  if(index === undefined) return null
   return (
     <FontAwesomeIcon icon={options[index].icon}></FontAwesomeIcon>
   )

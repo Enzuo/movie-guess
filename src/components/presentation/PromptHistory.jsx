@@ -1,11 +1,15 @@
+import './PromptHistory.css'
+import { reverseMap } from '../../logic/utils'
+
+
 export default function PromptHistory({ history }) {
 
   return (
-    <div>
-      History
+    <div className="prompt-history">
       <ul>
-        { history.map( (a, index) => <li key={index}>{a.text} {a.score}</li>)}
+        { reverseMap(history, (a, index) => <li key={index}>{a.text} {a.score}</li>)}
       </ul>
+      <div className="prompt-history-background"></div>
     </div>
   )
 }

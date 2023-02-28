@@ -22,9 +22,9 @@
 }
 
 .prompt input:focus {
-  border: 2px solid #3a74a3;
+  border: 2px solid #1363a5;
 }
 
 .prompt input:focus + button {
-  background: #3a74a3;
+  background: #1363a5;
 }
