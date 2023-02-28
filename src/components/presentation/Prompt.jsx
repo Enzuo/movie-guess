@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import './Prompt.css'
 
-export default forwardRef(function Prompt({ onSubmit }, ref) {
+export default forwardRef(function Prompt({ onSubmit, disabled}, ref) {
   const promptInput = useFormInput('')
 
   function handleSubmit(event) {
@@ -13,9 +13,9 @@ export default forwardRef(function Prompt({ onSubmit }, ref) {
 
   return (
     <div className="prompt">
-      <form onSubmit={handleSubmit}>
-        <input type="text" {...promptInput} ref={ref}></input>
-        <button type='submit'>
+      <form onSubmit={handleSubmit} disabled={disabled}>
+        <input type="text" {...promptInput} ref={ref} disabled={disabled}></input>
+        <button type='submit' disabled={disabled}>
           <FontAwesomeIcon icon={faArrowRight} />
         </button>
       </form>

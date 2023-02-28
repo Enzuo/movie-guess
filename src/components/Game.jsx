@@ -14,7 +14,7 @@ import './Game.css'
 export default function Game({user, round, onGameEnd, timeEnd}) {
 
   const [question, setQuestion] = useState({})
-  const [isGameOver, setOver] = useState(false)
+  const [isGameRunning, setRunning] = useState(true)
   const promptRef = useRef(null)
   // const [answer, setAnswer] = useState({})
   // const [clockTick, setClockTick] = useState(0)
@@ -30,7 +30,7 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
       .then(res => res.json())
       .then(res => {
         setQuestion(res)
-        setOver(false)
+        setRunning(true)
         setScore(0)
         console.log('got new question', res)
       })
@@ -47,7 +47,7 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
           .then(res => {
             addRoundToHistory(res)
           })
-        setOver(true)
+        setRunning(false)
         clearInterval(clock)
       }
     }, 1000)
@@ -55,10 +55,10 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
   }, [question])
 
   useEffect(() => {
-    if(isGameOver){
+    if(!isGameRunning){
       onGameEnd(score)
     }
-  }, [isGameOver])
+  }, [isGameRunning])
 
   function handleSubmit(answer){
     console.log(answer)
@@ -92,7 +92,7 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
             <VideoFile file={question.file}></VideoFile>
           </div>
           <CountdownTimer targetTime={timeEnd}></CountdownTimer>
-          <Prompt onSubmit={handleSubmit} ref={promptRef}></Prompt>
+          <Prompt onSubmit={handleSubmit} ref={promptRef} disabled={!isGameRunning}></Prompt>
           <AnswerStatus answer={promptsHistory[promptsHistory.length-1]}></AnswerStatus>
         </div>
         <div className="prompt-history">
