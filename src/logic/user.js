@@ -48,9 +48,9 @@ export function saveUser(user, users){
     return users.map((u) => u.id === user.id ? {...user} : u)
     // users[indexUser] = {...user}
   }
-  else {
-    users.push(user)
-  }
-  
-  return users
+  return users.concat(user)
+}
+
+export function removeUser(user, users){
+  return users.filter(u => u.id !== user.id)
 }

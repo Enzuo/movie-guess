@@ -26,7 +26,7 @@ function AppMain() {
   }, [editUser.id])
 
   function handleUserAddClick(){
-    setUsers((state) => state.concat(createUser()))
+    setUsers(saveUser(createUser(), users))
   }
 
   function handleUserEditClick(index){
