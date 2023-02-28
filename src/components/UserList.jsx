@@ -4,7 +4,7 @@ import { AVATARS, GENDERS } from "../logic/user"
 import Gender from './presentation/Gender'
 import {UserButton} from "./presentation/User"
 
-export default function UserList ({users, onAddClick, onEditClick, onSelect}) {
+export default function UserList ({users, onAddClick, onEditClick, onDeleteClick, onSelect}) {
 
   const [selectedId, setSelected] = useState(null)
 
@@ -14,6 +14,10 @@ export default function UserList ({users, onAddClick, onEditClick, onSelect}) {
 
   function handleEdit(index){
     onEditClick(index)
+  }
+
+  function handleDelete(index){
+    onDeleteClick(index)
   }
 
   function handleSelect(index){
@@ -36,8 +40,17 @@ export default function UserList ({users, onAddClick, onEditClick, onSelect}) {
   return (
     <form onSubmit={handleSubmit}>
       <div className="user-list">
-        {users.map((u, i) => <UserButton key={i} user={u} index={i} isSelected={selectedId === i} onSelect={() => handleSelect(i)} onEditClick={() => handleEdit(i)} avatars={AVATARS}/>)}
-          <button type="button" className="add-user" onClick={handleAdd}>+</button>
+        {users.map((u, i) => <UserButton 
+          key={i} 
+          user={u} 
+          index={i} 
+          isSelected={selectedId === i} 
+          onSelect={() => handleSelect(i)} 
+          onEditClick={() => handleEdit(i)} 
+          onDeleteClick={() => handleDelete(i)}
+          avatars={AVATARS}/>
+        )}
+        <button type="button" className="add-user" onClick={handleAdd}>+</button>
       </div>
       <input type="submit"/>
     </form>

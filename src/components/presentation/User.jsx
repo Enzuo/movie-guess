@@ -1,8 +1,8 @@
-import { faPencil } from "@fortawesome/free-solid-svg-icons"
+import { faClose, faPencil } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import './User.css'
 
-export default function User({user, isSelected, avatars, onEditClick, onClick}) {
+export default function User({user, isSelected, avatars, onEditClick, onClick, onDeleteClick}) {
   let className = isSelected ? "user selected" : "user"
 
   function handleEditClick(e) {
@@ -10,6 +10,12 @@ export default function User({user, isSelected, avatars, onEditClick, onClick}) 
     e.stopPropagation()
     e.preventDefault()
     onEditClick()
+  }
+
+  function handleDeleteClick(e){
+    console.log('delete click')
+
+    onDeleteClick()
   }
 
   return (
@@ -20,6 +26,7 @@ export default function User({user, isSelected, avatars, onEditClick, onClick}) 
       <div className="user-name">{user.name}</div>
       <div className="user-score">{user.score}</div>
       <button type="button" className="user-edit-button" onClick={handleEditClick}><FontAwesomeIcon icon={faPencil}/></button>
+      <button type="button" className="user-delete-button" onClick={handleDeleteClick}><FontAwesomeIcon icon={faClose}/></button>
     </div>
   )
 }
@@ -32,7 +39,7 @@ function Avatar({options, index}){
   )
 }
 
-export function UserButton({user, index, isSelected, onSelect, onEditClick, avatars}) {
+export function UserButton({user, index, isSelected, onSelect, onEditClick, onDeleteClick, avatars}) {
   return (
     <div className="user-button">
       <label htmlFor={"user"+index}>
@@ -45,7 +52,7 @@ export function UserButton({user, index, isSelected, onSelect, onEditClick, avat
           onChange={(e) => onSelect(e.currentTarget.value)}
           onClick={(e) => onSelect(e.currentTarget.value)}
         />
-        <User avatars={avatars} onEditClick={onEditClick} user={user}></User>
+        <User avatars={avatars} onEditClick={onEditClick} onDeleteClick={onDeleteClick} user={user}></User>
       </label>
     </div>
   )

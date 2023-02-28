@@ -6,7 +6,8 @@
   margin-bottom: 5px;
 }
 
-.user-button {
+.user button.user-delete-button {
+  top:25px;
 }
 
 .user {
@@ -19,41 +20,52 @@
 }
 
 .user button {
+  all: unset; /* modern */
   position:absolute;
-  right:15px;
+  right:5px;
   top:5px;
-  background:none;
-  border:none;
+
+  font-size: 9px;
   color:rgb(88 165 232);
   cursor:pointer;
+  display:none;
+  padding: 2px;
+}
+
+input[class="user-button-radio"]:focus + div button, input[class="user-button-radio"]:checked + div button{
+  display:block;
 }
 
 .user button:focus, .user button:hover {
-  color:#a7d7ff;
+  color:white;
+  border-bottom: 1px solid white;
   /* border:1px solid #a7d7ff; */
 }
 
-input[class="user-button-radio"]:checked + div {
+/* input[class="user-button-radio"]:checked + div {
+  opacity: 1;
+  background: #1363a5;
+} */
+
+input[class="user-button-radio"]:focus + .user {
+  -webkit-box-shadow:inset 0px 0px 0px 1px #fff;
+  -moz-box-shadow:inset 0px 0px 0px 1px #fff;
+  box-shadow:inset 0px 0px 0px 1px #fff;
+}
+
+input[class="user-button-radio"]:checked + .user, input[class="user-button-radio"]:focus + .user {
   opacity: 1;
   background: #1363a5;
 }
 
-input[class="user-button-radio"]:focus + div {
-  background:#2F3B4A;
-}
-
 input[type="radio"], input[type="submit"] {
   position: absolute;
-  left: -9999px;
+  left: -9999px; 
   opacity:0;
 }
 
 .user:hover {
   background:#2F3B4A;
-}
-
-.user button{
-  font-size: 9px;
 }
 
 .user.selected{

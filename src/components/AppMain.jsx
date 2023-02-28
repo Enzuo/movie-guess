@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect} from "react"
 
-import {createUser, saveUser} from '../logic/user'
+import {createUser, saveUser, removeUser} from '../logic/user'
 import UserList from "./UserList"
 import UserEdit from "./UserEdit"
 import Game from "./Game"
@@ -14,6 +14,7 @@ function AppMain() {
   // const [usersLS, setUsersLS] = useLocalStorage('users', [createUser()])
   // const [users, setUsers] = useState(usersLS)
   const [editUser, setEditUser] = useState({})
+  const [currentDeleteUser, setCurrentDeleteUser] = useState({})
   const [gameState, setGameState] = useState({isStarted: false, round:0})
   const userEditRef = useRef()
 
@@ -33,12 +34,22 @@ function AppMain() {
     setEditUser(users[index])
   }
 
+  function handleUserDeleteClick(index){
+    console.log('delete user', index)
+    setCurrentDeleteUser(users[index])
+  }
+
 
   function handleUserSave(user){
     console.log('user got edited', user)
     setEditUser(user)
     // users[userEditIndex] = user
     setUsers(saveUser(user, users))
+  }
+
+  function handleUserDelete(user){
+    setCurrentDeleteUser({})
+    setUsers(removeUser(user, users))
   }
 
   function handleUserSelect(user){
@@ -56,6 +67,8 @@ function AppMain() {
         round : gameState.round + 1
       })
     }
+
+    // TODO maybe main loop should be here
   }
 
   function handleGameEnd(score){
@@ -76,10 +89,20 @@ function AppMain() {
     </Modal>) 
   : null
 
+  let userDelete = currentDeleteUser.id ? (
+    <Modal onExit={() => {setCurrentDeleteUser({})}}>
+      <div>
+        Delete user {currentDeleteUser.name} ? 
+        <button onClick={handleUserDelete(currentDeleteUser)}>Delete</button>
+      </div>
+    </Modal>) 
+  : null
+
   return (
     <>
       {userEdit}
-      <UserList users={users} onAddClick={handleUserAddClick} onEditClick={handleUserEditClick} onSelect={handleUserSelect}></UserList>
+      {userDelete}
+      <UserList users={users} onAddClick={handleUserAddClick} onEditClick={handleUserEditClick} onDeleteClick={handleUserDeleteClick} onSelect={handleUserSelect}></UserList>
       <Game timeEnd={gameState.timeEnd} user={gameState.user} round={gameState.round} onGameEnd={handleGameEnd}></Game>
       <button onClick={testScore}>Add score</button>
     </>
