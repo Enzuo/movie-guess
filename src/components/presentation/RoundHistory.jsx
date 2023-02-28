@@ -9,6 +9,7 @@ export default function RoundHistory({history}){
       <ul>
         { reverseMap( history, (d, index) => (<li key={index}><RoundResult d={d}></RoundResult></li>) )}
       </ul>
+      <div className="game-history-background"></div>
     </div>
   )
 }

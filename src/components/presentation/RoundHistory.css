@@ -1,17 +1,38 @@
 .game-history {
+  position: relative;
+  display: flex;
+  align-content: flex-end;
+  height: 400px;
+  overflow: hidden;
 }
 
 .game-round {
   display: flex;
   background: #20272e;
-  margin: 10px;
+  margin: 7px;
   color: #5f7185;
   text-align: left;
   padding: 2px;
   box-shadow: 1px 1px 0px 1px #15171a;
+  animation: 1s appearing;
+}
+
+@keyframes appearing {
+  from {background-color: white;}
+  to {background-color: #20272e;}
 }
 
 .movie-title {
   font-size:15px;
   padding:2px 10px;
+}
+
+.game-history-background {
+  position: absolute;
+  top:0;
+  z-index:10;
+  height:300px;
+  width:100%;
+  background: linear-gradient(0deg, rgba(0,212,255,0) 0%, #181f27 100%);
+  pointer-events: none;
 }
