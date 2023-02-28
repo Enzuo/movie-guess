@@ -68,10 +68,10 @@ export default function CountdownTimer({ targetTime, countDownLength = 10 }) {
   const color = seconds > 5 ? "#aaa" : "#d33"
 
   return (
-    <div style={{width : '100%', height: '2px'}}>
+    <div style={{width : '100%', height: '3px'}}>
       <svg className="countdown-svg" style={{width: '100%', height:'100%', display: "block"}}>
       
-        <rect width="100%" height="100%" style={{fill: "rgb(60 80 104)"}}></rect>
+        <rect width="100%" height="100%" style={{fill: "rgb(40 53 68);"}}></rect>
         <rect ref={urgentRef} width="100%" height="100%" style={{opacity: 0, fill: "rgb(244 50 80)"}}></rect>
         <rect ref={passingRef} width="100%" height="100%" style={{fill: "rgb(30 41 54)"}}></rect>
       </svg>
