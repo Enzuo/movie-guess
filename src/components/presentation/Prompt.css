@@ -1,5 +1,6 @@
 .prompt form {
   display:flex;
+  margin-top: 30px;
 }
 
 .prompt input {

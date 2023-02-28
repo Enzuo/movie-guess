@@ -1,9 +1,10 @@
 import { useState, useEffect, useReducer, useRef } from "react"
 
-export default function CountdownTimer({ targetTime }) {
+export default function CountdownTimer({ targetTime, countDownLength = 10 }) {
 
-  const [countDownLength, setCountDownLength] = useState(10)
-  const pathRef = useRef(null)
+  // const [countDownLength, setCountDownLength] = useState(10)
+  const passingRef = useRef(null)
+  const urgentRef = useRef(null)
 
   // TODO Fix unpure reducer
   const [countDown, updateCountDown] = useReducer((state, action) => {
@@ -31,20 +32,26 @@ export default function CountdownTimer({ targetTime }) {
     let animationFrameId
     const animateFn = () => {
 
-      if(pathRef){
+      const currentTime = new Date().getTime()
+      const time = targetTime - currentTime
+      const ct = time > 0 ? time : 0
+      const percent = (ct/(countDownLength*1000))*100
+      const radius = 360*percent
 
-        const currentTime = new Date().getTime()
-        const time = targetTime - currentTime
-        const ct = time > 0 ? time : 0
-        const percent = ct/(countDownLength*1000)
-        const radius = 360*percent
-
-        pathRef.current.setAttribute("d", describeArc(14, 14, 12, 0, radius))
+      if(passingRef){
+        passingRef.current.setAttribute("width", 100-percent + "%")
       }
 
+      if(urgentRef){
+        // if(percent < 25){
+          const opacity = (25-percent)/25
+          urgentRef.current.setAttribute("style", "opacity: "+opacity+"; fill: rgb(244 50 80)")
+        // }
+      }
 
-
-      animationFrameId = requestAnimationFrame(animateFn)
+      if(ct > 0){
+        animationFrameId = requestAnimationFrame(animateFn)
+      }
     }
     
 
@@ -61,22 +68,12 @@ export default function CountdownTimer({ targetTime }) {
   const color = seconds > 5 ? "#aaa" : "#d33"
 
   return (
-    <div>
-      {seconds}
-      <svg className="countdown-svg" style={{width: '28px', height:'28px'}}>
-        <path
-            fill="none"
-            stroke="#ddd"
-            strokeWidth="2"
-            d={describeArc(14, 14, 12, 0, 359)}
-        />
-        <path
-            ref={pathRef}
-            fill="none"
-            stroke={color}
-            strokeWidth="4"
-            d={describeArc(14, 14, 12, 0, radius)}
-        />
+    <div style={{width : '100%', height: '2px'}}>
+      <svg className="countdown-svg" style={{width: '100%', height:'100%', display: "block"}}>
+      
+        <rect width="100%" height="100%" style={{fill: "rgb(60 80 104)"}}></rect>
+        <rect ref={urgentRef} width="100%" height="100%" style={{opacity: 0, fill: "rgb(244 50 80)"}}></rect>
+        <rect ref={passingRef} width="100%" height="100%" style={{fill: "rgb(30 41 54)"}}></rect>
       </svg>
     </div>
   )
