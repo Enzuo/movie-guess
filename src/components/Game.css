@@ -2,8 +2,10 @@
   display: flex;
 }
 
-.game-history {
-  flex: 1;
+.game-title {
+  margin: 20px;
+  color: #627b97;
+  font-weight: 900;
 }
 
 .game-theater {

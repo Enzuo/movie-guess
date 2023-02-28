@@ -87,7 +87,7 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
           <RoundHistory history={roundsHistory}></RoundHistory>
         </div>
         <div className="game-theater">
-          <div>What&apos;s this movie ?</div>
+          <div className="game-title">What&apos;s this movie ?</div>
           <div className="theater" style={theaterStyle}>
             <VideoFile file={question.file}></VideoFile>
           </div>
