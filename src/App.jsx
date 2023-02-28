@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import io from 'socket.io-client'
 import logo from './logo.svg'
+import './reset.css'
 import './App.css'
 import Quizz from './components/Game'
 import UserEdit from './components/UserEdit'
