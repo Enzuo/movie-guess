@@ -14,7 +14,7 @@ export default forwardRef(function Prompt({ onSubmit, disabled}, ref) {
   return (
     <div className="prompt">
       <form onSubmit={handleSubmit} disabled={disabled}>
-        <input type="text" {...promptInput} ref={ref} disabled={disabled}></input>
+        <input type="text" {...promptInput} ref={ref}></input>
         <button type='submit' disabled={disabled}>
           <FontAwesomeIcon icon={faArrowRight} />
         </button>
