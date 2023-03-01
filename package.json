@@ -5,6 +5,7 @@
   "scripts": {
     "server": "nodemon --exec babel-node server.js",
     "build-server": "babel server.js --out-file server-compiled.js",
+    "build-data": "node ./src/logic/build-data.js",
     "dev": "concurrently  --kill-others 'vite' \"npm run server\"",
     "build": "vite build",
     "preview": "vite preview",
@@ -38,6 +39,7 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@vitejs/plugin-react": "^1.3.0",
+    "convert-csv-to-json": "^2.0.0",
     "eslint": "^8.21.0",
     "eslint-plugin-jest": "^26.8.2",
     "eslint-plugin-react": "^7.30.1",

@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser')
+const dataClips = require('./movies.json')
 const { checkAnswer, checkProposition } = require('./answer');
 var router = express();
 
@@ -10,11 +11,11 @@ router.use(bodyParser.urlencoded({ extended: false }))
 router.use(bodyParser.json())
 
 
-const dataClips = [
-    {title: ["jibaro"], file : "jibaro2_nqjs1w", poster : "lovedeathrobots"},
-    {title: ["mr bean ultimate disaster"], file : "ultimatedisaster", poster : "mrbean"},
-    {title: ["idiocracy"], file : "idiocracyiq", poster : "idiocracy"},
-]
+// const dataClips = [
+//     {title: ["men in black"], file : "mib1", poster : "mib1"},
+//     {title: ["Knight and day"], file : "knightandday3", poster : "knightandday"},
+//     // {title: ["idiocracy"], file : "idiocracyiq", poster : "idiocracy"},
+// ]
 
 router.get('/', function (req, res) {
   res.send('Api Home page');
@@ -33,7 +34,7 @@ router.get('/getAnswer', function (req, res) {
     return res.status(400).send()
   }
   const clip = dataClips[clipId] // dataClips.find((clip) => clip.id === clipId)
-  res.json({id: clipId, title: clip.title, poster : clip.poster })
+  res.json({id: clipId, title: clip.title, poster : clip.poster, year : clip.year })
 })
 
 router.post('/answer', function (req, res) {
@@ -49,7 +50,7 @@ router.post('/answer', function (req, res) {
 
 function pickAQuestion(data){
     let id = Math.floor(Math.random()*data.length)
-    return {id: id, file: data[id].file }
+    return {id: id, file: data[id].filename }
 }
 
 module.exports = router;

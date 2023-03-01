@@ -1,3 +1,9 @@
+# Data
+*.csv
+source
+target
+target2
+
 # Logs
 logs
 *.log

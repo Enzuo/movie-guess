@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SOURCEDIR=./source/
-TARGETDIR=./target/
+TARGETDIR=./target2/
 
 get_filename () {
   fullpath=$1
@@ -29,8 +29,8 @@ do
   echo $OUTPATH
 
   
-  ffmpeg -i $filepath -c:v libvpx-vp9 -b:v 0.2M -pass 1 -an -f null NUL && ^
-  ffmpeg -i $filepath -c:v libvpx-vp9 -b:v 0.2M -pass 2 -c:a libopus $OUTPATH
+  ffmpeg -i $filepath -c:v libvpx-vp9 -b:v 0.5M -pass 1 -an -f null NUL && ^
+  ffmpeg -i $filepath -c:v libvpx-vp9 -b:v 0.5M -pass 2 -c:a libopus $OUTPATH
 done
 
 
