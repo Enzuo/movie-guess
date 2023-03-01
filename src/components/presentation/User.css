@@ -47,15 +47,16 @@ input[class="user-button-radio"]:focus + div button, input[class="user-button-ra
   background: #1363a5;
 } */
 
+input[class="user-button-radio"]:checked + .user{
+  opacity: 1;
+  background: #325775;
+} 
 input[class="user-button-radio"]:focus + .user {
+  opacity: 1;
+  background: #1363a5;
   -webkit-box-shadow:inset 0px 0px 0px 1px #fff;
   -moz-box-shadow:inset 0px 0px 0px 1px #fff;
   box-shadow:inset 0px 0px 0px 1px #fff;
-}
-
-input[class="user-button-radio"]:checked + .user, input[class="user-button-radio"]:focus + .user {
-  opacity: 1;
-  background: #1363a5;
 }
 
 input[type="radio"], input[type="submit"] {

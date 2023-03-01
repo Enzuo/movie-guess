@@ -65,9 +65,17 @@ button {
   border: none;
   color: white;
   cursor: pointer;
+  outline:none;
 }
 
-.add-user:hover, .add-user:focus {
+.add-user:focus {
+  background: #1363a5;
+  -webkit-box-shadow:inset 0px 0px 0px 1px #fff;
+  -moz-box-shadow:inset 0px 0px 0px 1px #fff;
+  box-shadow:inset 0px 0px 0px 1px #fff;
+}
+
+.add-user:hover {
   background: #32475f;
 }
 
