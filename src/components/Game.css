@@ -10,10 +10,18 @@
   height:22px;
 }
 
-.game-theater {
+.game-theater-col {
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+
+.game-theater {
+  display:flex;
+  justify-content: center;
+}
+.game-theater video{
+  flex: 1;
 }
 
 .game-history-col, .prompt-history-col {

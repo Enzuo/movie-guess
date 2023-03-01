@@ -88,9 +88,9 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
         <div className="game-history-col">
           <RoundHistory history={roundsHistory}></RoundHistory>
         </div>
-        <div className="game-theater">
+        <div className="game-theater-col">
           <div className="game-title">{gameQuestion}</div>
-          <div className="theater" style={theaterStyle}>
+          <div className="game-theater" style={theaterStyle}>
             <VideoFile file={question.file}></VideoFile>
           </div>
           <CountdownTimer targetTime={timeEnd}></CountdownTimer>
