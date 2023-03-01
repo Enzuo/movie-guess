@@ -14,7 +14,7 @@ import './Game.css'
 export default function Game({user, round, onGameEnd, timeEnd}) {
 
   const [question, setQuestion] = useState({})
-  const [isGameRunning, setRunning] = useState(true)
+  const [isGameRunning, setRunning] = useState(false)
   const promptRef = useRef(null)
   // const [answer, setAnswer] = useState({})
   // const [clockTick, setClockTick] = useState(0)
@@ -55,7 +55,7 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
   }, [question])
 
   useEffect(() => {
-    if(!isGameRunning){
+    if(round && !isGameRunning){
       onGameEnd(score)
     }
   }, [isGameRunning])
@@ -78,6 +78,8 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
     background: "black",
   }
 
+  let gameQuestion = isGameRunning ? 'What\'s this movie ?' : null
+
 
 
   if (question) {
@@ -87,7 +89,7 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
           <RoundHistory history={roundsHistory}></RoundHistory>
         </div>
         <div className="game-theater">
-          <div className="game-title">What&apos;s this movie ?</div>
+          <div className="game-title">{gameQuestion}</div>
           <div className="theater" style={theaterStyle}>
             <VideoFile file={question.file}></VideoFile>
           </div>

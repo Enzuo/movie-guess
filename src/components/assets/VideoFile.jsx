@@ -26,15 +26,13 @@ const VideoFile = (props) => {
   // myVideo.
 
   // Apply the transformation.
-  myVideo.resize(fill().width(267).height(150))
+  myVideo.resize(fill().width(267))
 //   .gravity(Gravity.autoGravity().autoFocus(AutoFocus.focusOn(FocusOn.faces())))) // Crop the video, focusing on the faces.
 //   .roundCorners(byRadius(20));    // Round the corners.
 
   // Render the transformed video in a React component.
   return (
-    <div>
-      <AdvancedVideo muted autoPlay cldVid={myVideo} onError={(err) => {console.log('video error', err)}}/>
-    </div>
+    <AdvancedVideo autoPlay cldVid={myVideo} onError={(err) => {console.log('video error', err)}}/>
   )
 };
 

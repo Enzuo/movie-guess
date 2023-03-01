@@ -79,10 +79,7 @@ function AppMain() {
     setGameState(Object.assign(gameState, {isStarted: false}))
   }
 
-  function testScore(){
-    gameState.user.score  = gameState.user.score + 1
-    setUsers(saveUser(gameState.user, users))
-  }
+
 
   let userEdit = editUser.id ? (
     <Modal onExit={() => {setEditUser({})}}>
@@ -105,7 +102,6 @@ function AppMain() {
       {userDelete}
       <UserList users={users} onAddClick={handleUserAddClick} onEditClick={handleUserEditClick} onDeleteClick={handleUserDeleteClick} onSelect={handleUserSelect}></UserList>
       <Game timeEnd={gameState.timeEnd} user={gameState.user} round={gameState.round} onGameEnd={handleGameEnd}></Game>
-      <button onClick={testScore}>Add score</button>
     </>
   )
 }

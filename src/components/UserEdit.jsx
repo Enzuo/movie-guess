@@ -8,14 +8,15 @@ export default forwardRef(function UserEdit ({user, onEdit}, ref) {
   }
   return(
     <div>
-      Name : 
-      <input ref={ref} type="text" value={user.name} onChange={(e) => onEdit({...user, name : e.target.value})}></input>
-      Age : <Number value={user.age} onChange={(age) => onEdit({...user, age})}>
-
-      </Number>
-      Gender : <GenderPicker value={user.gender} options={GENDERS} onPick={(gender) => onEdit({...user, gender})}>
-
-      </GenderPicker>
+      <p>
+        <label htmlFor="name" >Name :</label> 
+        <input ref={ref} label="name" type="text" value={user.name} onChange={(e) => onEdit({...user, name : e.target.value})}></input>
+      </p>
+      <p>
+        <label htmlFor="age">Age:</label>
+        <Number value={user.age} onChange={(age) => onEdit({...user, age})}/>
+      </p>
+      <GenderPicker value={user.gender} options={GENDERS} onPick={(gender) => onEdit({...user, gender})}/>
       <AvatarPicker value={user.avatar} options={AVATARS} onPick={(avatar) => onEdit({...user, avatar})}></AvatarPicker>
     </div>
   )

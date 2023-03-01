@@ -18,6 +18,8 @@ export default function Poster ({file}) {
   img.resize(thumbnail().width(50).height(75))
 
   return (
-    <AdvancedImage cldImg={img}></AdvancedImage>
+    <div style={{height:'75px', width:'50px', flexShrink: 0}}>
+      <AdvancedImage cldImg={img}></AdvancedImage>
+    </div>
   )
 }
