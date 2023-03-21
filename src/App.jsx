@@ -11,7 +11,7 @@ function App() {
   const [count, setCount] = useState(0)
 
   useEffect(() => {
-    fetch('api/getQuestion').then(res => res.json()).then(res => console.log(res))
+    // fetch('api/getQuestion').then(res => res.json()).then(res => console.log(res))
     var socket = io(); // defaults trying to connect to the host that serves the page.
   })
 

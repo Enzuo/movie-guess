@@ -71,7 +71,7 @@ export default function CountdownTimer({ targetTime, countDownLength = 10 }) {
     <div style={{width : '100%', height: '3px'}}>
       <svg className="countdown-svg" style={{width: '100%', height:'100%', display: "block"}}>
       
-        <rect width="100%" height="100%" style={{fill: "rgb(40 53 68);"}}></rect>
+        <rect width="100%" height="100%" style={{fill: "rgb(40 53 68)"}}></rect>
         <rect ref={urgentRef} width="100%" height="100%" style={{opacity: 0, fill: "rgb(244 50 80)"}}></rect>
         <rect ref={passingRef} width="100%" height="100%" style={{fill: "rgb(30 41 54)"}}></rect>
       </svg>

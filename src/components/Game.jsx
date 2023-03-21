@@ -26,6 +26,7 @@ export default function Game({user, round, onGameEnd, timeEnd}) {
     if(!round){
       return
     }
+    console.log('ok get a question')
     fetch('api/getQuestion')
       .then(res => res.json())
       .then(res => {

@@ -13,6 +13,7 @@ function AppMain() {
   const [users, setUsers] = useLocalStorage('users', [createUser()])
   // const [usersLS, setUsersLS] = useLocalStorage('users', [createUser()])
   // const [users, setUsers] = useState(usersLS)
+  // TODO use id here instead of user object to avoid repeatition of data
   const [editUser, setEditUser] = useState({})
   const [currentDeleteUser, setCurrentDeleteUser] = useState({})
   const [gameState, setGameState] = useState({isStarted: false, round:0})

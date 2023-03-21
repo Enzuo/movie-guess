@@ -9,7 +9,7 @@ import {FocusOn} from "@cloudinary/url-gen/qualifiers/focusOn";
 import {Gravity} from "@cloudinary/url-gen/qualifiers";
 import {AutoFocus} from "@cloudinary/url-gen/qualifiers/autoFocus";
 
-const VideoFile = (props) => {
+const VideoFile = ({file}) => {
 
   // Create and configure your Cloudinary instance.
   const cld = new Cloudinary({
@@ -18,7 +18,9 @@ const VideoFile = (props) => {
     },
   }); 
 
-  const {file} = props
+  if(!file){
+    return null
+  }
 
   // Use the video with public ID, 'docs/walking_talking'.
   const myVideo = cld.video(`clips/${file}`);
