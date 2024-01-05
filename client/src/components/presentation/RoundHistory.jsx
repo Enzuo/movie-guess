@@ -1,3 +1,4 @@
+import * as React from 'react'
 import Poster from '../assets/Poster'
 import { reverseMap } from '../../logic/utils'
 import './RoundHistory.css'

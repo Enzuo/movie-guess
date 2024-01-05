@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { useState, useEffect, useReducer, useRef} from 'react'
 
 import VideoFile from './assets/VideoFile'
