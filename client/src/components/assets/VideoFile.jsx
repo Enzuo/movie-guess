@@ -9,7 +9,7 @@ import {FocusOn} from "@cloudinary/url-gen/qualifiers/focusOn";
 import {Gravity} from "@cloudinary/url-gen/qualifiers";
 import {AutoFocus} from "@cloudinary/url-gen/qualifiers/autoFocus";
 
-const VideoFile = ({file}) => {
+const VideoFile = ({file, isHidden=false}) => {
 
   // Create and configure your Cloudinary instance.
   const cld = new Cloudinary({
@@ -34,7 +34,9 @@ const VideoFile = ({file}) => {
 
   // Render the transformed video in a React component.
   return (
-    <AdvancedVideo autoPlay cldVid={myVideo} onError={(err) => {console.log('video error', err)}}/>
+    <div class="movie-clip" style={{display: isHidden ? 'none' : 'block'}}>
+      <AdvancedVideo autoPlay cldVid={myVideo} onError={(err) => {console.log('video error', err)}}/>
+    </div>
   )
 };
 

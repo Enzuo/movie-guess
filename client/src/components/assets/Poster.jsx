@@ -15,11 +15,13 @@ const myCld = new Cloudinary({
 
 
 function Poster ({file}) {
+  const height = 200
+  const width = 133
   let img = myCld.image(`poster/${file}.jpg`)
-  img.resize(thumbnail().width(50).height(75))
+  img.resize(thumbnail().width(width).height(height))
 
   return (
-    <div style={{height:'75px', width:'50px', flexShrink: 0}}>
+    <div style={{height:height+'px', width:width+'px', flexShrink: 0}}>
       <AdvancedImage cldImg={img}></AdvancedImage>
     </div>
   )

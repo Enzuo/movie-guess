@@ -3,8 +3,8 @@ import { useState, useEffect} from "react"
 
 import movieClips from '../data/movies.json'
 import VideoFile from './assets/VideoFile'
-
-console.log('movieClips', movieClips)
+import CountdownTimer from './CountDownTimer'
+import Poster from './assets/Poster'
 
 function AppMain() {
 
@@ -49,28 +49,35 @@ function AppMain() {
 
   if(isStarted && gameState.phase === 'answer'){
     return (
-      <>
-      Showing answer
-      {gameState.question}
-      {gameState.answer}
-      <button autoFocus onClick={handleResetGame}>Continue</button>
-      </>
+      <div className="game-layout">
+        <h1>{gameState.question}</h1>
+        <h2>{gameState.answer}</h2>
+        <div class="movie-detail">
+          <ul>
+            <li>{gameState.movie.title}</li>
+            <li>{gameState.movie.year}</li>
+          </ul>
+          <Poster file={gameState.movie.poster}></Poster>
+        </div>
+        <button autoFocus onClick={handleResetGame}>Continue</button>
+      </div>
     )
   }
 
   if(isStarted){
     return (
-      <>
-      Playing movie
-      {gameState.question}
-      <VideoFile file={gameState.movie.filename}/>
-      {gameState.phase === 'goToAnswer' && <button autoFocus onClick={handleShowAnswer}>Voir la réponse</button>}
-      </>
+      <div className="game-layout">
+        <h1>{gameState.question}</h1>
+        <VideoFile file={gameState.movie.filename}/>
+        <CountdownTimer targetTime={gameState.timeEnd}></CountdownTimer>
+        {gameState.phase === 'goToAnswer' && <button autoFocus onClick={handleShowAnswer}>Voir la réponse</button>}
+      </div>
     )
   }
 
   return (
     <>
+      <VideoFile isHidden={true} file={gameState.movie.filename}/>
       <button autoFocus onClick={handleStartGame}>Start</button>
     </>
   )
@@ -98,7 +105,14 @@ function pickMovieClip(data){
 }
 
 function pickQuestion(movie){
-  return {question : 'Quel est le titre de film ?', answer : movie.title}
+  const questionIndex = Math.floor(Math.random() * 10)
+  if(questionIndex <= 2) {
+    return {question : 'Qui a réalisé ce film ?', answer : movie.realisteur}
+  }
+  if(questionIndex <= 3) {
+    return {question : 'Quel sont les acteurs que l\'on apercoit dans cet extrait ?', answer : movie.actors}
+  }
+  return {question : 'De quelle oeuvre est tirée cet extrait ?', answer : movie.title}
 }
 
 function startGame(gameState){
