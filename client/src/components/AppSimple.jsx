@@ -12,40 +12,13 @@ import Modal from "./presentation/Modal"
 
 function AppMain() {
 
-  // const [usersLS, setUsersLS] = useLocalStorage('users', [createUser()])
-  // const [users, setUsers] = useState(usersLS)
-  // TODO use id here instead of user object to avoid repeatition of data
-  // const [editUser, setEditUser] = useState({})
-  // const [currentDeleteUser, setCurrentDeleteUser] = useState({})
   const [gameState, setGameState] = useState({isStarted: false, round:0, timeEnd:0, movie:{title:''}, question: '', answer: '', phase : ''})
   const [isStarted, setIsStarted] = useState(false)
-  // const userEditRef = useRef()
 
-  // function startGame(user){
-  //   // launch new game with selected user
-  //   const ROUND_TIME = 10000
-  //   if(!gameState.isStarted){
-  //     setGameState({
-  //       timeEnd: new Date().getTime() + ROUND_TIME, 
-  //       isStarted: true, 
-  //       round : gameState.round + 1
-  //     })
-  //   }
-
-  //   // TODO maybe main loop should be here
-  // }
-
-
-
-
-  // function handleGameEnd(score){
-  //   console.log('got score', score)
-  //   gameState.user.score  = gameState.user.score ? gameState.user.score + score : score
-  //   setGameState(Object.assign(gameState, {isStarted: false}))
-  // }
-
+  
   function handlePrepareGame() {
-    prepareGame(gameState)
+    const state = prepareGame(gameState)
+    setGameState(state)
   }
 
   function handleStartGame() {
@@ -55,14 +28,27 @@ function AppMain() {
     setGameState(state)
   }
 
+  function handleShowAnswer(){
+    const phase = 'answer'
+    setGameState({...gameState, phase})
+  }
+
+  function handleResetGame() {
+    setIsStarted(false)
+    setGameState({...gameState, phase: 'start'})
+  }
+
   useEffect(() => {
+    if(!isStarted){
+      handlePrepareGame()
+    }
     if(isStarted) {
       startGameClock(gameState, handleGameEnd)
     }
   },[isStarted])
 
   function handleGameEnd() {
-    setGameState({...gameState, phase : 'answer'})
+    setGameState({...gameState, phase : 'goToAnswer'})
   }
 
   if(isStarted && gameState.phase === 'answer'){
@@ -71,7 +57,7 @@ function AppMain() {
       Showing answer
       {gameState.question}
       {gameState.answer}
-      <button onClick={handleStartGame}>Continue</button>
+      <button autoFocus onClick={handleResetGame}>Continue</button>
       </>
     )
   }
@@ -82,6 +68,7 @@ function AppMain() {
       Playing movie
       {gameState.question}
       {gameState.movie.title}
+      {gameState.phase === 'goToAnswer' && <button autoFocus onClick={handleShowAnswer}>Voir la réponse</button>}
       </>
     )
   }
@@ -102,10 +89,10 @@ export default AppMain
  */
 function prepareGame(gameState){
   // pick a movie
-  const moviePool = [{title : test}]
+  const moviePool = [{title : 'test'}]
   const movie = pickMovieClip(moviePool)
-  const question = pickQuestion(movie)
-  return gameState = {...gameState, movie, question}
+  const {question, answer} = pickQuestion(movie)
+  return gameState = {...gameState, movie, question, answer}
 }
 
 function pickMovieClip(data){
@@ -136,8 +123,4 @@ function startGameClock(gameState, cb){
     clearTimeout(clock)
   }, timeEnd-currentTime)
   return {...gameState, clock}
-}
-
-function showAnswer(){
-
 }
