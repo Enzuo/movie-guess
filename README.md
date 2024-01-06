@@ -20,3 +20,11 @@ ffmpeg -i mrbean.mp4 -ss 00:00:00 -to 00:00:24 -c:v libvpx-vp9 -b:v 0.8M -pass 2
 
 ffmpeg -i mrbean.mp4 -c:v libvpx-vp9 -b:v 0.8M -pass 1 -an -f null NUL && ^
 ffmpeg -i mrbean.mp4 -c:v libvpx-vp9 -b:v 0.8M -pass 2 -c:a libopus output.webm
+
+## Deploy 
+
+https://github.com/ErickKS/vite-deploy
+
+## Status
+
+[![Deploy](https://github.com/Enzuo/movie-guess/actions/workflows/deploy.yml/badge.svg)](https://github.com/Enzuo/movie-guess/actions/workflows/deploy.yml)
