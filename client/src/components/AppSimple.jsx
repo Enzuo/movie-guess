@@ -1,21 +1,17 @@
 import * as React from 'react'
-import { useState, useRef, useEffect} from "react"
+import { useState, useEffect} from "react"
 
+import movieClips from '../data/movies.json'
+import VideoFile from './assets/VideoFile'
 
-import {createUser, saveUser, removeUser} from '../logic/user'
-import UserList from "./UserList"
-import UserEdit from "./UserEdit"
-import Game from "./Game"
-import { useLocalStorage } from "../hooks/localStorage"
-import Modal from "./presentation/Modal"
-
+console.log('movieClips', movieClips)
 
 function AppMain() {
 
   const [gameState, setGameState] = useState({isStarted: false, round:0, timeEnd:0, movie:{title:''}, question: '', answer: '', phase : ''})
   const [isStarted, setIsStarted] = useState(false)
 
-  
+
   function handlePrepareGame() {
     const state = prepareGame(gameState)
     setGameState(state)
@@ -67,7 +63,7 @@ function AppMain() {
       <>
       Playing movie
       {gameState.question}
-      {gameState.movie.title}
+      <VideoFile file={gameState.movie.filename}/>
       {gameState.phase === 'goToAnswer' && <button autoFocus onClick={handleShowAnswer}>Voir la réponse</button>}
       </>
     )
@@ -89,7 +85,7 @@ export default AppMain
  */
 function prepareGame(gameState){
   // pick a movie
-  const moviePool = [{title : 'test'}]
+  const moviePool = movieClips
   const movie = pickMovieClip(moviePool)
   const {question, answer} = pickQuestion(movie)
   return gameState = {...gameState, movie, question, answer}
